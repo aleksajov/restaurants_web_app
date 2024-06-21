@@ -1,0 +1,29 @@
+<h2>Informacije o restoranu</h2>
+
+Naziv restorana: {{currRestaurant.name}}<br>
+Adresa restorana: {{currRestaurant.address}}<br>
+Tip restorana: {{currRestaurant.type}}<br>
+Telefon restorana: {{currRestaurant.phone}}<br>
+Lista komentara: <p *ngFor="let comment of currRestaurant.comments">{{comment}}</p> <br>
+
+<h4>Lokacija</h4>
+<iframe
+  width="600"
+  height="450"
+  style="border:0"
+  loading="lazy"
+  [src]="mapUrl" allowfullscreen>
+</iframe>
+<hr>
+<h4>Rezervacija stola</h4>
+
+<form #form="ngForm" (ngSubmit)="submit(form)">
+  <label for="dateTime">Datum i vreme:</label>
+  <input type="datetime-local" name="dateTime" id="dateTime" [(ngModel)]="dateTime" required><br>
+  <label for="numPeople">Broj osoba:</label>
+  <input type="text" name="numPeople" id="numPeople" [(ngModel)]="numPeople" required><br>
+  <label for="shortDesc">Kratak opis:</label>
+  <textarea id="shortDesc" name="shortDesc" [(ngModel)]="shortDesc"></textarea><br>
+  <button type="submit">Rezerviši</button>
+</form>
+<p>{{message}}</p>

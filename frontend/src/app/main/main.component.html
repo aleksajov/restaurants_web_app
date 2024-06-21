@@ -1,0 +1,31 @@
+<h1>Kutak dobre hrane</h1>
+
+<a routerLink="/login">Prijavite se</a>
+<a routerLink="/register">Registrujte se</a> <br>
+<div>
+    <p>Ukupan broj restorana: {{allRestaurants.length}} <br>
+    Ukupan broj registrovanih gostiju: {{allGuests.length}}
+    </p>
+</div>
+<div>
+    <p>Restorani</p>
+    <div>
+        <input type="text" placeholder="Pretraga po imenu" [(ngModel)]="searchName" (input)="filterRestaurants()">
+        <input type="text" placeholder="Pretraga po adresi" [(ngModel)]="searchAddress" (input)="filterRestaurants()">
+        <input type="text" placeholder="Pretraga po tipu" [(ngModel)]="searchType" (input)="filterRestaurants()">
+      </div>
+    <table>
+        <tr>
+            <th (click)="sortData('name')">Naziv</th>
+            <th (click)="sortData('address')">Adresa</th>
+            <th (click)="sortData('type')">Tip</th>
+            <th>Konobari</th>
+        </tr>
+        <tr *ngFor="let restaurant of combinedDataFiltered">
+            <td>{{ restaurant.name }}</td>
+            <td>{{ restaurant.address }}</td>
+            <td>{{ restaurant.type }}</td>
+            <td>{{ restaurant.waiters }}</td>
+          </tr>
+    </table>
+</div>

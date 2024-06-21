@@ -1,0 +1,17 @@
+<h3>Zaboravljena lozinka</h3>
+
+<label>Korisničko ime:</label><input type="text" [(ngModel)]="username" [disabled]="showNew"><button (click)="click()" [disabled]="showNew">Potvrdi</button>
+<br>
+<div *ngIf="show">
+    <p>Bezbednosno pitanje: {{logged?logged.question:"null"}}</p>
+    <label>Odgovor:</label><input type="text" [(ngModel)]="answerQuest">
+    <button (click)="answer()">Potvrdi</button>
+</div>
+<div *ngIf="showNew">
+    <label>Unesite novu lozinku:</label><input type="password" [(ngModel)]="newPass1"> <br>
+    <label>Potvrdite novu lozinku:</label><input type="password" [(ngModel)]="newPass2"> <br>
+    <button (click)="change()">Promeni</button>
+</div>
+
+
+<p>{{message}}</p>

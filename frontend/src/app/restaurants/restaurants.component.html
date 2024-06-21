@@ -1,0 +1,25 @@
+<div>
+    <p>Restorani</p>
+    <div>
+        <input type="text" placeholder="Pretraga po imenu" [(ngModel)]="searchName" (input)="filterRestaurants()">
+        <input type="text" placeholder="Pretraga po adresi" [(ngModel)]="searchAddress" (input)="filterRestaurants()">
+        <input type="text" placeholder="Pretraga po tipu" [(ngModel)]="searchType" (input)="filterRestaurants()">
+      </div>
+    <table>
+        <tr>
+            <th>Naziv</th>
+            <th>Adresa</th>
+            <th>Tip</th>
+            <th>Konobari</th>
+            <th>Prosečna ocena</th>
+        </tr>
+        <tr *ngFor="let restaurant of combinedDataFiltered">
+            <td><a (click)="show(restaurant.id)">{{ restaurant.name }}</a></td>
+            <td>{{ restaurant.address }}</td>
+            <td>{{ restaurant.type }}</td>
+            <td>{{ restaurant.waiters }}</td>
+            <td>{{restaurant.avg | number:'1.2-2'}}</td>
+            <td *ngFor="let star of floor(restaurant.avg)">⭐</td>
+          </tr>
+    </table>
+</div>

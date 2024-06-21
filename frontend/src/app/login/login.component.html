@@ -1,0 +1,10 @@
+<h2>Prijava</h2>
+Korisničko ime: <input type="text" [(ngModel)]="username">
+<br/>
+Lozinka: <input type="password" [(ngModel)]="password"><button (click)="login()">Prijavi se</button>
+<br/>
+<a routerLink="/forgotten">Zaboravljena lozinka</a>
+<br>
+
+<p>{{err}}</p>
+

@@ -1,0 +1,11 @@
+<h2>Login admin</h2>
+Korisničko ime: <input type="text" [(ngModel)]="username">
+<br/>
+Lozinka: <input type="password" [(ngModel)]="password">
+<br/>
+<button (click)="login()">Login</button>
+<br>
+<a routerLink="/forgotten">Zaboravljena lozinka</a>
+<br>
+<p>{{err}}</p>
+
