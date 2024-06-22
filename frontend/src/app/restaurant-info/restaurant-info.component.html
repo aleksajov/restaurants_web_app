@@ -21,9 +21,44 @@ Lista komentara: <p *ngFor="let comment of currRestaurant.comments">{{comment}}<
   <label for="dateTime">Datum i vreme:</label>
   <input type="datetime-local" name="dateTime" id="dateTime" [(ngModel)]="dateTime" required><br>
   <label for="numPeople">Broj osoba:</label>
-  <input type="text" name="numPeople" id="numPeople" [(ngModel)]="numPeople" required><br>
+  <input type="number" name="numPeople" id="numPeople" [(ngModel)]="numPeople" required><br>
   <label for="shortDesc">Kratak opis:</label>
   <textarea id="shortDesc" name="shortDesc" [(ngModel)]="shortDesc"></textarea><br>
   <button type="submit">Rezerviši</button>
 </form>
 <p>{{message}}</p>
+
+<hr>
+<h4>Jelovnik</h4>
+<table>
+  <tr>
+    <th>Ime jela</th>
+    <th>Slika</th>
+    <th>Cena</th>
+    <th>Sastojci</th>
+    <th>Količina</th>
+  </tr>
+  <tr *ngFor="let item of currRestaurant.menu; let i=index">
+    <td>{{item.name}}</td>
+    <td><img [src]="item.photo" alt="*" style="width: 300px; height: 200px;"></td>
+    <td>{{item.cost}}</td>
+    <td>{{item.ingredients}}</td>
+    <td><input type="number" [(ngModel)]="howMany[i]" min="0"></td>
+  </tr> <br>
+  <button (click)="addToCart()">Ažuriraj korpu</button> <br>
+  <p>{{message2}}</p>
+<hr>
+<div>
+  <h4>Korpa</h4>
+  <table>
+    <tr>
+      <th>Stavka</th>
+      <th>Količina</th>
+    </tr>
+    <tr *ngFor="let item of cart">
+      <td>{{currRestaurant.menu[item.idF].name}}</td>
+      <td>{{item.quantity}}</td>
+    </tr>
+  </table>
+</div>
+<button (click)="order()" [disabled]="!boolOrder">Poručite</button>

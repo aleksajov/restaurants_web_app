@@ -2,7 +2,6 @@ import express from 'express'
 import { UserController } from '../controllers/user.controller'
 
 const userRouter = express.Router()
-
 userRouter.route("/updateData").post(
     (req,res)=>new UserController().updateData(req,res)
 )

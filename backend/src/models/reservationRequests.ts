@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
 
-const reservationSchema = new mongoose.Schema(
+const reservationReqSchema = new mongoose.Schema(
     {
         restaurantId: Number,
         dateTime: String,
@@ -15,4 +15,4 @@ const reservationSchema = new mongoose.Schema(
     }
 );
 
-export default mongoose.model('ReservationModel', reservationSchema, 'reservations');
+export default mongoose.model('ReservationRequestModel', reservationReqSchema, 'resRequests');

@@ -1,4 +1,12 @@
-export class Table{
-    free: boolean = true
-    numberSeats: number = -1
-}
+import mongoose from 'mongoose'
+
+const tableSchema = new mongoose.Schema(
+    {
+        taken: String,
+        numberSeats: Number
+    },{
+      versionKey:false  
+    }
+);
+
+export default mongoose.model('TableModel', tableSchema);

@@ -1,5 +1,4 @@
 import mongoose from 'mongoose'
-import { Table } from './table';
 
 const restaurantSchema = new mongoose.Schema(
     {
@@ -12,7 +11,8 @@ const restaurantSchema = new mongoose.Schema(
         mapUrl: String,
         waiters: Array,
         workingTime: Array,
-        tables: Array<Table>
+        tables: Array,
+        menu: Array
     },{
       versionKey:false  
     }

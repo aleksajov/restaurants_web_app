@@ -7,6 +7,10 @@ restaurantRouter.route("/getAllRestaurants").get(
     (req,res)=>new RestaurantController().getAll(req,res)
 )
 
+restaurantRouter.route("/getRestaurantById").get(
+    (req,res)=>new RestaurantController().getRestaurantById(req,res)
+)
+
 
 
 export default restaurantRouter;

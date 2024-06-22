@@ -1,4 +1,4 @@
 export class Table{
-    free: boolean = true
+    taken: string = ""
     numberSeats: number = -1
 }
