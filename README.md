@@ -1,0 +1,1 @@
+Web application for tracking restaurants, waiters working in them, and their guests
