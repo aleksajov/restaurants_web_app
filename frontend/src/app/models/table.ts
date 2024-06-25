@@ -1,4 +1,5 @@
 export class Table{
-    taken: string = ""
+    idT: number = -1
+    taken: Array<string> = []
     numberSeats: number = -1
 }

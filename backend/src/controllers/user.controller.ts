@@ -6,15 +6,35 @@ import { Request, Response } from 'express-serve-static-core';
 const crypto = require('crypto-js');
 
 export class UserController{
+    checkAnswer= (req: express.Request, res: express.Response)=>{
+
+        let usernameP=req.body.username
+        let answerP=req.body.answer
+
+        UserM.findOne({username:usernameP}).then(user=>{
+            if(user){
+                if(user.answer==answerP){
+                    res.json({"msg":"ok"})
+                }
+                else{
+                    res.json({"msg":"false"})
+                }
+            }
+            else{
+                res.json({"msg":"unknown user"})
+            }
+        }).catch((err)=>{console.log(err)})
+    }
     getUsers= (req: express.Request, res: express.Response)=>{
-        UserM.find().then(data=>{
-            res.json(data)
+
+        UserM.find({}, { answer: 0, password: 0, salt: 0 }).then(data=>{
+            res.json(data);
         }).catch(err=>{
-            console.log(err)
-        })
+            console.log(err);
+        });
     }
     getWaiters= (req: express.Request, res: express.Response)=>{
-        UserM.find({type:"waiter"}).then(data=>{
+        UserM.find({type:"waiter"}, { answer: 0, password: 0, salt: 0 }).then(data=>{
             res.json(data)
         }).catch(err=>{
             console.log(err)
@@ -128,8 +148,27 @@ export class UserController{
     getUser= (req: express.Request, res: express.Response)=>{
         let usernamep=req.body.username
         UserM.findOne({username:usernamep}).then(user=>{
-            if(user)
-                res.json(user)
+            if(user){
+                const { username, password, question, answer, firstname, lastname, gender, address,
+                    phone, mail, photo, card, type, deactivated, idR
+                } = user;
+                const user2 = { 
+                    username,
+                    question,
+                    firstname,
+                    lastname,
+                    gender,
+                    address,
+                    phone,
+                    mail,
+                    photo,
+                    card,
+                    type,
+                    deactivated,
+                    idR
+                };
+                res.json(user2);
+            }
             else
                 res.json(null)
         }).catch((err)=>{
@@ -192,7 +231,25 @@ export class UserController{
                 const salt=user.salt
                 const hashedPasswordP = crypto.SHA512(passwordP + salt).toString();
                 if(hashedPasswordP==hashedPassword){
-                    res.json(user)
+                    const { username, password, question, answer, firstname, lastname, gender, address,
+                        phone, mail, photo, card, type, deactivated, idR
+                    } = user;
+                    const user2 = { 
+                        username,
+                        question,
+                        firstname,
+                        lastname,
+                        gender,
+                        address,
+                        phone,
+                        mail,
+                        photo,
+                        card,
+                        type,
+                        deactivated,
+                        idR
+                    };
+                    res.json(user2);
                 }
                 else{
                     res.json(null)
@@ -215,7 +272,25 @@ export class UserController{
                 const salt=user.salt
                 const hashedPasswordP = crypto.SHA512(passwordP + salt).toString();
                 if(hashedPasswordP==hashedPassword){
-                    res.json(user)
+                    const { username, password, question, answer, firstname, lastname, gender, address,
+                        phone, mail, photo, card, type, deactivated, idR
+                    } = user;
+                    const user2 = { 
+                        username,
+                        question,
+                        firstname,
+                        lastname,
+                        gender,
+                        address,
+                        phone,
+                        mail,
+                        photo,
+                        card,
+                        type,
+                        deactivated,
+                        idR
+                    };
+                    res.json(user2);
                 }
                 else{
                     res.json(null)

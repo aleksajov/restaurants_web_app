@@ -2,7 +2,8 @@ import mongoose from 'mongoose'
 
 const tableSchema = new mongoose.Schema(
     {
-        taken: String,
+        idT: Number,
+        taken: Array,
         numberSeats: Number
     },{
       versionKey:false  

@@ -1,0 +1,31 @@
+<div>
+    <h4>Neobrađene rezervacije</h4>
+    <table>
+        <tr>
+            <th>Vreme</th>
+            <th>Broj ljudi</th>
+            <th>Dodatni zahtevi</th>
+            <th>Zahtev postavio</th>
+        </tr>
+        <tr *ngFor="let r of unprocessedReservations">
+            
+            <td>{{r.dateTime.split('T')[0]}} {{r.dateTime.split('T')[1]}}</td>
+            <td>{{r.number}}</td>
+            <td>{{r.description}}</td>
+            <td>{{r.username}}</td>
+            <td><button (click)="accept(r)" [disabled]="selectTable" [disabled]="disabled(r)">Prihvati</button></td>
+            <td><button (click)="decline(r)" [disabled]="disabled(r)" [disabled]="selectTable">Odbij</button></td>
+        </tr>
+    </table>
+</div>
+<div *ngIf="selectTable">
+    Sto za:
+    <select  [(ngModel)]="selectedTableId" (change)="approveReservation()">
+        <option *ngFor="let t of acceptableTables" [value]="t.idT">{{t.numberSeats}} ljudi</option>
+    </select>
+</div>
+
+<form #form="ngForm" *ngIf="declineShow" (submit)="submit(form)">
+    <input name="input" type="text" placeholder="Obavezan komentar" [(ngModel)]="declination" required>
+    <button type="submit">Potvrdi</button>
+</form>

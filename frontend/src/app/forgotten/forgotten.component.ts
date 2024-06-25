@@ -26,14 +26,18 @@ answer(){
     this.message="Odgovorite na pitanje"
     return
   }
-  if(this.answerQuest==this.logged?.answer){
-    this.message=""
-    this.showNew=true
-    this.show=false
-  }
-  else{
-    this.message="Netacan odgovor"
-  }
+  this.service.checkAnswer(this.logged!.username, this.answerQuest).subscribe(data=>{
+    if(data){
+      if(data.msg=="ok"){
+        this.message=""
+        this.showNew=true
+        this.show=false
+      }
+      else if(data.msg=="false"){
+        this.message="Netačan odgovor"
+      }
+    }
+  })
 }
 
 
@@ -88,7 +92,6 @@ click(){
     return
   }
   this.service.getUser(this.username).subscribe(user=>{
-    console.log(user)
     if(user){
       this.message=""
       this.show=true

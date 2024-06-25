@@ -7,6 +7,98 @@ import { ParsedQs } from 'qs'
 
 
 export class ReservationController{
+    cancel= (req: express.Request, res: express.Response) => {
+        let dataP=req.body.reservation
+        ReservationM.deleteOne({username: dataP.username, restaurantId: dataP.restaurantId, dateTime: dataP.dateTime, number: dataP.number, description: dataP.description}).then(data=>{
+            RestaurantModel.updateOne({id: dataP.restaurantId, "tables.idT": dataP.tableId}, {$pull: {"tables.$.taken": dataP.dateTime}}).then(data=>{
+            res.json({"msg":"Rezervacija je uspešno otkazana"})
+            })
+        }).catch(err=>{
+            res.json({"msg":err})
+        })
+    }
+    getAcceptedForUser= (req: express.Request, res: express.Response) => {
+        let username=req.body.username
+        ReservationM.find({username: username}).then(async data=>{
+            const withRestaurant = await Promise.all(data.map(async item => {
+                const restaurantName = await RestaurantModel.findOne({id: item.restaurantId},{name:1, address:1});
+                const restaurantNameOnly = restaurantName!.name;
+                const restaurantAddressOnly=restaurantName!.address;
+                return {...item.toObject(), restaurantName: restaurantNameOnly, restaurantAddress: restaurantAddressOnly};
+            }));
+            res.json(withRestaurant);
+        }).catch(err=>{
+            console.log(err)
+        })
+    }
+    getPending= (req: express.Request, res: express.Response) => {
+        let username=req.body.username
+
+        ReservationReqM.find({username: username, declination:""}).then(async data=>{
+            const currDate = new Date();
+            const active = data.filter((item) => {
+                if(item.dateTime){
+                    const reservationDate = new Date(item.dateTime);
+                    return reservationDate > currDate;
+                }
+                return false;
+            });
+
+            const activeWithRestaurant = await Promise.all(active.map(async item => {
+                const restaurantName = await RestaurantModel.findOne({id: item.restaurantId},{name:1});
+                const restaurantNameOnly = restaurantName!.name;
+                return {...item.toObject(), restaurantName: restaurantNameOnly};
+            }));
+            res.json(activeWithRestaurant);
+        }).catch(err=>{
+            console.log(err)
+        })
+    }
+    approve= (req: express.Request, res: express.Response) => {
+        let data=req.body.reservationToApprove
+        let tableId=req.body.selectedTableId
+        let waiter=req.body.waiter
+
+        let newReservation = new ReservationM({
+            username: data.username,
+            restaurantId: data.restaurantId,
+            dateTime: data.dateTime,
+            number: data.number,
+            description: data.description,
+            tableId: tableId,
+            waiter: waiter,
+            grade: -1,
+            comment: "",
+            extended: false
+        })
+        newReservation.save().then(data=>{
+            ReservationReqM.deleteOne({username: data.username, restaurantId: data.restaurantId, dateTime: data.dateTime, number: data.number, description: data.description}).then(data=>{
+                RestaurantModel.updateOne({id: newReservation.restaurantId, "tables.idT": newReservation.tableId}, {$push: {"tables.$.taken": newReservation.dateTime}}).then(data=>{
+                    res.json({"msg":"Rezervacija prihvaćena"})
+                })
+            })
+        }).catch(err=>{
+            res.json({"msg":err})
+        })
+    }
+    decline= (req: express.Request, res: express.Response) => {
+        let data=req.body.declinedRes
+        let declination=req.body.declination
+        ReservationReqM.updateMany({username: data.username, restaurantId: data.restaurantId, dateTime: data.dateTime, number: data.number, description: data.description}, {$set:{declination: declination}}).then(data=>{
+            res.json({"msg":"Zahtev je uspešno odbijen"})
+            
+        }).catch(err=>{
+            res.json({"msg":err})
+        })
+    }
+    getUnprocessed = (req: express.Request, res: express.Response) => {
+        let idRP = req.body.idR
+        ReservationReqM.find({restaurantId: idRP, declination:""}).then(data=>{
+            res.json(data)
+        }).catch(err=>{
+            console.log(err)
+        })
+    }
     addRequest= (req: express.Request, res: express.Response)=>{
         let username = req.body.username
         let id = req.body.id
@@ -44,8 +136,8 @@ export class ReservationController{
                         description: description,
                         extended: false,
                         grade: -1,
-                        comment: ""
-            
+                        comment: "",
+                        declination: ""
                     })
                     newReservation.save().then(data=>{
                         res.json({"msg":"Zahtev za rezervaciju je poslat"})

@@ -16,7 +16,8 @@ const userSchema = new mongoose.Schema(
         card: String,
         type: String,
         salt: String,
-        deactivated: Boolean
+        deactivated: Boolean,
+        idR: Number
     },{
       versionKey:false  
     }

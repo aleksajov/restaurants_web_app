@@ -9,7 +9,8 @@ const reservationReqSchema = new mongoose.Schema(
         extended: Boolean,
         grade: Number,
         comment: String,
-        username: String
+        username: String,
+        declination: String
     },{
       versionKey:false  
     }

@@ -11,7 +11,7 @@ const restaurantSchema = new mongoose.Schema(
         mapUrl: String,
         waiters: Array,
         workingTime: Array,
-        tables: Array,
+        tables: [{idT:Number, numberSeats: Number, taken: Array}],
         menu: Array
     },{
       versionKey:false  

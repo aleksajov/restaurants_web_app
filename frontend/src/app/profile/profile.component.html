@@ -4,8 +4,10 @@
     Mejl: {{logged.mail}} <input type="text" [(ngModel)]="newMail" placeholder="Novo ime"> <br>
     Adresa: {{logged.address}} <input type="text" [(ngModel)]="newAddress" placeholder="Nova adresa"> <br>
     Kontakt telefon: {{logged.phone}} <input type="text" [(ngModel)]="newPhone" placeholder="Novi br. tel."> <br>
-    Br. kartice: {{logged.card}} <input type="text" [(ngModel)]="newCard" placeholder="Novi br. kartice"> <br>
-    Prifilna slika: <img [src]="logged.photo" alt="Photo?"><input type="file" (change)="handleFileInput($event)"><br>
+    <ng-container *ngIf='logged.type=="guest"'>
+        Br. kartice: {{logged.card}} <input type="text" [(ngModel)]="newCard" placeholder="Novi br. kartice"> <br>
+    </ng-container>
+    Profilna slika: <img [src]="logged.photo" alt="Photo?"><input type="file" (change)="handleFileInput($event)"><br>
 </p>
 
 <button (click)="confirm()">Potvrdi izmene</button> <br>

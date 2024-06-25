@@ -12,5 +12,9 @@ restaurantRouter.route("/getRestaurantById").get(
 )
 
 
+restaurantRouter.route("/getTablesForRestaurant").post(
+    (req,res)=>new RestaurantController().getTablesForRestaurant(req,res)
+)
+
 
 export default restaurantRouter;

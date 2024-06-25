@@ -1,8 +1,6 @@
 export class User{
-  username: string=""
-    password: string=""
+    username: string=""
     question: string=""
-    answer: string=""
     firstname: string = ""
     lastname: string = ""
     gender: string=""
@@ -13,4 +11,5 @@ export class User{
     card: string=""
     type: string=""
     deactivated: boolean=false
+    idR: number=-1
 }

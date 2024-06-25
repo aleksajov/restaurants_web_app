@@ -19,6 +19,9 @@ import { RestaurantsComponent } from './restaurants/restaurants.component';
 import { ReservationsComponent } from './reservations/reservations.component';
 import { DeliveriesComponent } from './deliveries/deliveries.component';
 import { RestaurantInfoComponent } from './restaurant-info/restaurant-info.component';
+import { StatsComponent } from './stats/stats.component';
+import { DeliveriesWaiterComponent } from './deliveries-waiter/deliveries-waiter.component';
+import { ReservationsWaiterComponent } from './reservations-waiter/reservations-waiter.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +39,10 @@ import { RestaurantInfoComponent } from './restaurant-info/restaurant-info.compo
     RestaurantsComponent,
     ReservationsComponent,
     DeliveriesComponent,
-    RestaurantInfoComponent
+    RestaurantInfoComponent,
+    StatsComponent,
+    DeliveriesWaiterComponent,
+    ReservationsWaiterComponent
   ],
   imports: [
     BrowserModule,

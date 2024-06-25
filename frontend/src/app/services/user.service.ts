@@ -7,6 +7,13 @@ import { Message } from '../models/message';
   providedIn: 'root'
 })
 export class UserService {
+  checkAnswer(username: string, answerQuest: string) {
+    let data={
+      username: username,
+      answer: answerQuest
+    }
+    return this.http.post<Message>('http://localhost:4000/users/checkAnswer', data)
+  }
   getAllUsers() {
     return this.http.get<User[]>('http://localhost:4000/users/getUsers')
   }

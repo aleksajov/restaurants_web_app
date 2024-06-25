@@ -9,7 +9,9 @@ const reservationSchema = new mongoose.Schema(
         extended: Boolean,
         grade: Number,
         comment: String,
-        username: String
+        username: String,
+        waiter: String,
+        tableId: Number
     },{
       versionKey:false  
     }

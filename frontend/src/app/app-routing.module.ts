@@ -14,18 +14,27 @@ import { RestaurantsComponent } from './restaurants/restaurants.component';
 import { ReservationsComponent } from './reservations/reservations.component';
 import { DeliveriesComponent } from './deliveries/deliveries.component';
 import { RestaurantInfoComponent } from './restaurant-info/restaurant-info.component';
+import { ReservationsWaiterComponent } from './reservations-waiter/reservations-waiter.component';
+import { DeliveriesWaiterComponent } from './deliveries-waiter/deliveries-waiter.component';
+import { StatsComponent } from './stats/stats.component';
 
 const routes: Routes = [
   {path:"login", component:LoginComponent},
   {path:"guest", component:GuestComponent, children:[
-    { path: '', redirectTo: 'profile', pathMatch: 'full' },
-    { path: 'profile', component: ProfileComponent },
+    {path: "", redirectTo: "profile", pathMatch: "full"},
+    {path: "profile", component: ProfileComponent },
     {path:"restaurants", component:RestaurantsComponent},
     {path:"reservations", component:ReservationsComponent},
     {path:"deliveries", component:DeliveriesComponent},
   ]},
   {path:"admin", component:AdminComponent},
-  {path:"waiter", component:WaiterComponent},
+  {path:"waiter", component:WaiterComponent, children:[
+    {path: "", redirectTo: "profile", pathMatch: "full"},
+    {path: "profile", component: ProfileComponent },
+    {path:"reservations", component:ReservationsWaiterComponent},
+    {path:"deliveries", component:DeliveriesWaiterComponent},
+    {path:"stats", component:StatsComponent}
+  ]},
   {path:"loginAdmin", component:LoginAdminComponent},
   {path:"register", component:RegisterComponent},
   {path:"", component:MainComponent},

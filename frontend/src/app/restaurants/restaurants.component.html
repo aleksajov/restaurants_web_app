@@ -18,8 +18,14 @@
             <td>{{ restaurant.address }}</td>
             <td>{{ restaurant.type }}</td>
             <td>{{ restaurant.waiters }}</td>
-            <td>{{restaurant.avg | number:'1.2-2'}}</td>
-            <td *ngFor="let star of floor(restaurant.avg)">⭐</td>
+            <ng-container *ngIf="isNumber(restaurant.avg)">
+                <td>{{restaurant.avg | number:'1.2-2'}}</td>
+                <td *ngFor="let star of floor(restaurant.avg)">⭐</td>
+            </ng-container>
+            <ng-container *ngIf="isNumber(restaurant.avg)">
+                <td *ngFor="let star of floor(5 - restaurant.avg)">☆</td>
+            </ng-container>
+            <td *ngIf="!isNumber(restaurant.avg)">{{restaurant.avg}}</td>
           </tr>
     </table>
 </div>
