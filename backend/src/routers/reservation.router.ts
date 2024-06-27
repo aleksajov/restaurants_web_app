@@ -29,11 +29,13 @@ reservationRouter.route("/getPending").post(
 reservationRouter.route("/getAcceptedForUser").post(
     (req,res)=>new ReservationController().getAcceptedForUser(req,res)
 )
-
-reservationRouter.route("/cancel").post(
-    (req,res)=>new ReservationController().cancel(req,res)
+reservationRouter.route("/getMyReservations").post(
+    (req,res)=>new ReservationController().getMyReservations(req,res)
 )
 
+reservationRouter.route("/didntCame").post(
+    (req,res)=>new ReservationController().didntCame(req,res)
+)
 
 
 

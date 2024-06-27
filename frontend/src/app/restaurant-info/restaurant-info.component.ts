@@ -94,7 +94,7 @@ export class RestaurantInfoComponent implements OnInit{
           this.cart = this.cart.filter(item => item.idF !== this.currRestaurant.menu[i].idF);
         }
       } else if(this.howMany[i] > 0){
-        this.cart.push({idF:this.currRestaurant.menu[i].idF, quantity:this.howMany[i]});
+        this.cart.push({idF:this.currRestaurant.menu[i].idF, quantity:this.howMany[i], name:this.currRestaurant.menu[i].name});
       }
     }
     if(this.cart.length==0){

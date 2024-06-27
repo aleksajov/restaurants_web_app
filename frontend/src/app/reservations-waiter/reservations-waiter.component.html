@@ -29,3 +29,25 @@
     <input name="input" type="text" placeholder="Obavezan komentar" [(ngModel)]="declination" required>
     <button type="submit">Potvrdi</button>
 </form>
+
+
+<hr>
+<div>
+    <h4>Moje rezervacije</h4>
+    <table>
+        <tr>
+            <th>Vreme</th>
+            <th>Broj ljudi</th>
+            <th>Dodatni zahtevi</th>
+            <th>Zahtev postavio</th>
+        </tr>
+        <tr *ngFor="let r of myReservations">
+            
+            <td>{{r.dateTime.split('T')[0]}} {{r.dateTime.split('T')[1]}}</td>
+            <td>{{r.number}}</td>
+            <td>{{r.description}}</td>
+            <td>{{r.username}}</td>
+            <td *ngIf="checkHalfHour(r.dateTime)"><button (click)="didntCame(r)">Nije se pojavio</button></td>
+        </tr>
+    </table>
+</div>

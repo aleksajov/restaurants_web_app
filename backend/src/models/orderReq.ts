@@ -4,7 +4,9 @@ const orderReqSchema = new mongoose.Schema(
     {
         username: String,
         idR: Number,
-        items: [{idF: Number, quantity: Number}]
+        items: [{idF: Number, quantity: Number, name:String}],
+        idO: Number,
+        deliveryTime: String
     },{
       versionKey:false  
     }

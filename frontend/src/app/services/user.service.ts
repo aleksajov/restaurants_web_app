@@ -7,6 +7,25 @@ import { Message } from '../models/message';
   providedIn: 'root'
 })
 export class UserService {
+  addWaiter(data: any) {
+    return this.http.post<Message>('http://localhost:4000/users/addWaiter', data)
+  }
+  declineRegister(username: string, mail: string) {
+    let data={
+      username: username,
+      mail: mail
+    }
+    return this.http.post<Message>('http://localhost:4000/users/declineRegister', data)
+  }
+  acceptRegister(username: string) {
+    let data={
+      username: username
+    }
+    return this.http.post<Message>('http://localhost:4000/users/acceptRegister', data)
+  }
+  getRegisterRequests() {
+    return this.http.get<User[]>('http://localhost:4000/users/getRequests')
+  }
   checkAnswer(username: string, answerQuest: string) {
     let data={
       username: username,

@@ -17,6 +17,8 @@ import { RestaurantInfoComponent } from './restaurant-info/restaurant-info.compo
 import { ReservationsWaiterComponent } from './reservations-waiter/reservations-waiter.component';
 import { DeliveriesWaiterComponent } from './deliveries-waiter/deliveries-waiter.component';
 import { StatsComponent } from './stats/stats.component';
+import { UpdateUserComponent } from './update-user/update-user.component';
+import { AddWaiterComponent } from './add-waiter/add-waiter.component';
 
 const routes: Routes = [
   {path:"login", component:LoginComponent},
@@ -40,7 +42,9 @@ const routes: Routes = [
   {path:"", component:MainComponent},
   {path:"changePass", component:ChangePasswordComponent},
   {path:"forgotten", component:ForgottenComponent},
-  {path:"restaurantInfo", component:RestaurantInfoComponent}
+  {path:"restaurantInfo", component:RestaurantInfoComponent},
+  {path:"update", component:UpdateUserComponent},
+  {path:"addWaiter", component:AddWaiterComponent}
 ];
 
 @NgModule({

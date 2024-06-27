@@ -17,6 +17,9 @@ export class ReservationsWaiterComponent implements OnInit{
   loggedUsername:string=""
   logged:User=new User()
   unprocessedReservations: Reservation[] = []
+  myReservations: Reservation[] = []
+
+
   ngOnInit(): void {
     let ls=localStorage.getItem("logged")
     if(ls){
@@ -26,11 +29,8 @@ export class ReservationsWaiterComponent implements OnInit{
           this.logged=data
           this.resService.getUnproccesedReservations(this.logged.idR).subscribe(data=>{
             if(data){
-              this.unprocessedReservations=data
-              this.unprocessedReservations.sort((a, b) => {
-                return new Date(a.dateTime).getTime() - new Date(b.dateTime).getTime();
-              });
-              this.unprocessedReservations.filter(r=>{
+              let toFilter=data
+              toFilter.filter(r=>{
                 if(new Date(r.dateTime).getTime() < new Date().getTime()){
                   this.resService.declineReservation(r, "Isteklo vreme za rezervaciju").subscribe(data=>{
                   })
@@ -39,12 +39,25 @@ export class ReservationsWaiterComponent implements OnInit{
                 else{
                   return true
                 }
-              })
+             })
+             toFilter.sort((a, b) => {
+              return new Date(a.dateTime).getTime() - new Date(b.dateTime).getTime();
+            })
+             this.unprocessedReservations=toFilter
             }
           })
         }
       })
+      this.resService.getMyReservations(this.loggedUsername).subscribe(data=>{
+        if(data){
+         this.myReservations=data
+        }
+      })
     }
+  }
+
+  checkHalfHour(dateTime:string){
+    return new Date().getTime()>new Date(dateTime).getTime()+30*60*1000
   }
 
 
@@ -53,6 +66,8 @@ export class ReservationsWaiterComponent implements OnInit{
   selectedTableId:number=-1
   acceptableTables:Table[]=[]
   reservationToApprove:Reservation=new Reservation()
+
+
   accept(r:Reservation){
     this.selectTable=true
     this.reservationToApprove=r
@@ -89,6 +104,17 @@ export class ReservationsWaiterComponent implements OnInit{
           this.selectedTableId=-1
           this.reservationToApprove=new Reservation()
         }
+      }
+    })
+  }
+
+  //one za koje se korisnik pojavio u restoranu ostaju u bazi,
+  //dok one za koje je konobar potvrdio da nisu dosli se brisu
+  didntCame(r:Reservation){
+    this.resService.didntCame(r).subscribe(data=>{
+      if(data){
+        alert(data.msg)
+        this.ngOnInit()
       }
     })
   }

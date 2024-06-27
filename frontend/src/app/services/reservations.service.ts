@@ -7,6 +7,18 @@ import { Reservation } from '../models/reservation';
   providedIn: 'root'
 })
 export class ReservationsService {
+  didntCame(r: Reservation) {
+    let data={
+      reservation: r
+    }
+    return this.http.post<Message>('http://localhost:4000/reservations/didntCame', data)
+  }
+  getMyReservations(loggedUsername: string) {
+    let data={
+      username: loggedUsername
+    }
+    return this.http.post<Reservation[]>('http://localhost:4000/reservations/getMyReservations', data)
+  }
   cancel(reservation: Reservation) {
     let data={
       reservation: reservation

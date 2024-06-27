@@ -1,1 +1,38 @@
-<p>deliveries works!</p>
+<div>
+    <h4>Aktuelne narudžbine</h4>
+    <table>
+        <tr>
+            <th>Id narudžbine</th>
+            <th>Restoran</th>
+            <th>Status</th>
+            <th>Najkasnije vreme dostave</th>
+        </tr>
+        <tr *ngFor="let o of pendingOrders">
+            <td>{{o.idO}}</td>
+            <td>{{o.restaurant}}</td>
+            <td>U obradi</td>
+            <td>/</td>
+        </tr>
+        <tr *ngFor="let o2 of acceptedOrders">
+            <td>{{o2.idO}}</td>
+            <td>{{o2.restaurant}}</td>
+            <td>Prihvaćena</td>
+            <td>{{timeConversion(o2.deliveryTime)}}</td>
+        </tr>
+    </table>
+</div>
+<div>
+    <h4>Arhiva dostava</h4>
+    <table>
+        <tr>
+            <th>Id</th>
+            <th>Datum i vreme dostave</th>
+            <th>Restoran</th>
+        </tr>
+        <tr *ngFor="let o of archivedOrders">
+            <td>{{o.idO}}</td>
+            <td>{{timeConversion(o.deliveryTime)}}</td>
+            <td>{{o.restaurant}}</td>
+        </tr>
+    </table>
+</div>

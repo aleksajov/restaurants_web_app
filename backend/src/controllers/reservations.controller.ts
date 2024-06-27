@@ -7,6 +7,41 @@ import { ParsedQs } from 'qs'
 
 
 export class ReservationController{
+    didntCame= (req: express.Request, res: express.Response) => {
+        let dataP=req.body.reservation
+        ReservationM.deleteOne({username: dataP.username, restaurantId: dataP.restaurantId, dateTime: dataP.dateTime, number: dataP.number, description: dataP.description}).then(data=>{
+            RestaurantModel.updateOne({id: dataP.restaurantId, "tables.idT": dataP.tableId}, {$pull: {"tables.$.taken": dataP.dateTime}}).then(data=>{
+                res.json({"msg":"Rezervacija otkazana, sto oslobođen"})
+            })
+        }).catch(err=>{
+            res.json({"msg":err})
+        })
+    }
+    getMyReservations= (req: express.Request, res: express.Response) => {
+        let username=req.body.username
+        ReservationM.find({waiter: username}).then(data=>{
+            if(data){
+                const dataFiltered=data.filter(r=>{
+                if(r!.dateTime){
+                    if(new Date(r.dateTime).getTime()+3*60*60*1000 < new Date().getTime()){
+                        return false
+                      }
+                      else{
+                        return true
+                      }
+                }
+                else return false
+                })
+                res.json(dataFiltered)
+            }
+            else{
+                res.json(data)
+            }
+            
+        }).catch(err=>{
+            console.log(err)
+        })
+    }
     cancel= (req: express.Request, res: express.Response) => {
         let dataP=req.body.reservation
         ReservationM.deleteOne({username: dataP.username, restaurantId: dataP.restaurantId, dateTime: dataP.dateTime, number: dataP.number, description: dataP.description}).then(data=>{

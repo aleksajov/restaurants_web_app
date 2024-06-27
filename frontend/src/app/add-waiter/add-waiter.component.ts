@@ -1,14 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { HttpClient } from '@angular/common/http';
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  selector: 'app-add-waiter',
+  templateUrl: './add-waiter.component.html',
+  styleUrls: ['./add-waiter.component.css']
 })
-export class RegisterComponent implements OnInit{
-
+export class AddWaiterComponent {
   constructor(private service: UserService, private http: HttpClient){}
   ngOnInit(): void {
     this.message=""
@@ -25,7 +24,7 @@ export class RegisterComponent implements OnInit{
     this.phone=""
     this.mail=""
     this.photo=null
-    this.card=""
+    this.idR=""
   }
 
   username: string = ""
@@ -39,7 +38,7 @@ export class RegisterComponent implements OnInit{
   phone: string = ""
   mail: string = ""
   photo: File | null = null;
-  card: string = ""
+  idR: string = ""
 
   message: string = ""
   message2:string=""
@@ -56,7 +55,7 @@ export class RegisterComponent implements OnInit{
       this.address == "" ||
       this.phone == "" ||
       this.mail == "" ||
-      this.card == ""
+      this.idR == ""
     ) {
       this.message = "Nisu uneti svi podaci!"
       return
@@ -69,11 +68,6 @@ export class RegisterComponent implements OnInit{
     else if (!this.isValidEmail(this.mail))
     {
       this.message = "Mejl nije u odgovarajućem formatu"
-    }
-    else if (!this.isValidCreditCard(this.card))
-    {
-      this.message = "Broj kartice nije u odgovarajućem formatu"
-      return
     }
     else 
     {
@@ -89,7 +83,7 @@ export class RegisterComponent implements OnInit{
             address: this.address,
             phone: this.phone,
             mail: this.mail,
-            card: this.card,
+            idR: parseInt(this.idR),
             photo: "",
             deactivated: false
           };
@@ -98,10 +92,10 @@ export class RegisterComponent implements OnInit{
         const reader = new FileReader();
         reader.onloadend = () => {
         data.photo = reader.result as string;
-        this.service.register(data).subscribe(data=>{
+        this.service.addWaiter(data).subscribe(data=>{
           if(data){
             
-            if(data.msg=="Zahtev za registraciju poslat")
+            if(data.msg=="Konobar dodat")
             {
               alert(data.msg)
               this.ngOnInit()
@@ -128,9 +122,9 @@ export class RegisterComponent implements OnInit{
           const reader = new FileReader();
           reader.onloadend = () => {
             data.photo = reader.result as string;
-            this.service.register(data).subscribe(data=>{
+            this.service.addWaiter(data).subscribe(data=>{
               if(data){
-                if(data.msg=="Zahtev za registraciju poslat")
+                if(data.msg=="Konobar dodat")
                   {
                     alert(data.msg)
                     this.ngOnInit()

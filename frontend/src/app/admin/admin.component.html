@@ -1,2 +1,89 @@
 <h3>Admin</h3>
 <a routerLink="/changePass">Promena lozinke</a>
+<a routerLink="/addWaiter">Dodaj konobara</a>
+
+<hr>
+<div>
+    <h4>
+        Lista gostiju
+    </h4>
+    <table>
+        <tr>
+            <th>Korisnicko ime</th>
+            <th>Ime i prezime</th>
+        </tr>
+        <tr *ngFor="let user of guests">
+            <td>
+                {{user.username}}
+            </td>
+            <td>
+                {{user.firstname}} {{user.lastname}}
+            </td>
+            <td><button (click)="update(user.username)">Ažuriraj podatke</button></td>
+        </tr>
+    </table>
+</div>
+
+<div>
+    <h4>
+        Lista konobara
+    </h4>
+    <table>
+        <tr>
+            <th>Korisnicko ime</th>
+            <th>Ime i prezime</th>
+        </tr>
+        <tr *ngFor="let user of waiters">
+            <td>
+                {{user.username}}
+            </td>
+            <td>
+                {{user.firstname}} {{user.lastname}}
+            </td>
+            <td><button (click)="update(user.username)">Ažuriraj podatke</button></td>
+        </tr>
+    </table>
+</div>
+
+<hr>
+<div>
+    <h4>
+        Lista restorana
+    </h4>
+    <table>
+        <tr>
+            <th>IdR</th>
+            <th>Naziv</th>
+            <th>Adresa</th>
+        </tr>
+        <tr *ngFor="let r of allRestaurants">
+            <td>
+                {{r.id}}
+            </td>
+            <td>
+                {{r.name}}
+            </td>
+            <td>
+                {{r.address}}
+            </td>
+        </tr>
+    </table>
+</div>
+
+<hr>
+
+<div>
+    <h4>Zahtevi za registracijom gostiju</h4>
+    <table>
+        <tr>
+            <th>Korisnicko ime</th>
+            <th>Mejl</th>
+        </tr>
+        <tr *ngFor="let r of registerRequests">
+            <td>{{r.username}}</td>
+            <td>{{r.mail}}</td>
+            <td><button (click)="accept(r.username)">Prihvati</button></td>
+            <td><button (click)="decline(r.username, r.mail)">Odbij</button></td>
+        </tr>
+    </table>
+</div>

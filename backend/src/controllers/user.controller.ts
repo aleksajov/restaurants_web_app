@@ -6,6 +6,92 @@ import { Request, Response } from 'express-serve-static-core';
 const crypto = require('crypto-js');
 
 export class UserController{
+    addWaiter= (req: express.Request, res: express.Response)=>{
+        const { username, password, question, answer, firstname, lastname,gender, address, phone, mail, idR, photo} = req.body;
+        UserM.findOne({username:username}).then(user=>{
+            if(user==null){
+                UserM.findOne({mail:mail}).then(user2=>{
+                    if(user2==null){
+                        const salt = crypto.lib.WordArray.random(16).toString();
+                        const hashedPassword = crypto.SHA512(password + salt).toString();
+                
+                        let register={
+                            username: username,
+                            password: hashedPassword,
+                            question: question,
+                            answer: answer,
+                            firstname: firstname,
+                            lastname: lastname,
+                            gender: gender,
+                            address: address,
+                            phone: phone,
+                            mail: mail,
+                            idR: idR,
+                            photo: photo,
+                            type: "waiter",
+                            salt: salt,
+                            deactivated: false
+                        }
+                
+                        new UserM(register).save().then(ok=>{
+                            res.json({"msg": "Konobar dodat"})
+                        })
+                    }
+                    else{
+                        res.json({"msg":"Mejl vec postoji u sistemu"})
+                    }
+                })
+            }
+            else{
+                res.json({"msg":"Korisnicko ime vec postoji u sistemu"})
+            }
+        }).catch((err)=>{
+            res.json({"msg":err})
+        })
+
+    }
+    declineRegister= (req: express.Request, res: express.Response)=>{
+        let usernameP=req.body.username
+        let mailP=req.body.mail
+        RegisterRequestModel.deleteOne({username:usernameP}).then(data=>{
+            new UserM({
+                username:usernameP,
+                mail:mailP,
+                type:""
+            }).save().then(data2=>{
+                res.json({"msg":"Zahtev odbijen"})
+            })
+        }).catch(err=>{
+            res.json({"msg":err})
+        })
+    }
+    acceptRegister= (req: express.Request, res: express.Response)=>{
+        let usernameP=req.body.username
+        RegisterRequestModel.findOne({username:usernameP}).then(user=>{
+            if(user){
+                let userToSave=user.toObject()
+                delete (userToSave as any)._id;
+                new UserM(userToSave).save().then(data=>{
+                    RegisterRequestModel.deleteOne({username:usernameP}).then(data2=>{
+                        res.json({"msg":"Korisnik registrovan"})
+                    })
+                })
+
+            }
+            else{
+                res.json({"msg":"nepoznato korisničko ime"})
+            }
+        }).catch(err=>{
+            res.json({"msg":err})
+        })
+    }
+    getRequests= (req: express.Request, res: express.Response)=>{
+        RegisterRequestModel.find().then(data=>{
+            res.json(data)
+        }).catch(err=>{
+            console.log(err)
+        })
+    }
     checkAnswer= (req: express.Request, res: express.Response)=>{
 
         let usernameP=req.body.username
@@ -203,9 +289,7 @@ export class UserController{
                         }
                 
                         new RegisterRequestModel(register).save().then(ok=>{
-                            res.json({msg: "Zahtev za registraciju poslat"})
-                        }).catch(err=>{
-                            res.json({msg: "Greška pri registraciji"})
+                            res.json({"msg": "Zahtev za registraciju poslat"})
                         })
                     }
                     else{

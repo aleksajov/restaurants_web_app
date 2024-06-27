@@ -1,1 +1,23 @@
-<p>deliveries-waiter works!</p>
+<div>
+    <h4>Zahtevi za dostavu</h4>
+    <table>
+        <tr>
+            <th>Id</th>
+            <th>Podneo</th>
+            <th>Stavke</th>
+        </tr>
+        <tr *ngFor="let o of ordersPending; let ind=index">
+            <td>{{o.idO}}</td>
+            <td>{{o.username}}</td>
+            <td *ngFor="let i of o.items">{{i.name}}:{{i.quantity}}</td>
+            <td><select [(ngModel)]="selectedTimes[ind]" (change)="onSelect(o.idO, ind)">
+                <option value="30">20-30 minuta</option>
+                <option value="40">30-40 minuta</option>
+                <option value="60">50-60 minuta</option>
+            </select></td>
+            <td><button (click)="reject(o.idO)">Odbij</button></td>
+        </tr>
+    </table>
+</div>
+
+

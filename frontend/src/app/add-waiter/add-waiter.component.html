@@ -1,0 +1,47 @@
+<h3>Dodavanje konobara </h3>
+<label>Korisničko ime</label>
+<input type="text" [(ngModel)]="username"><br>
+
+<label>Lozinka</label>
+<input type="password" [(ngModel)]="password"><br>
+
+<label>Bezbednosno pitanje</label>
+<input type="text" [(ngModel)]="question"><br>
+
+<label>Odgovor na bezbednosno pitanje</label>
+<input type="text" [(ngModel)]="answer"><br>
+
+<label>Ime</label>
+<input type="text" [(ngModel)]="firstname"><br>
+
+<label>Prezime</label>
+<input type="text" [(ngModel)]="lastname"><br>
+
+<label>Pol</label>
+<select [(ngModel)]="gender">
+    <option value="M">M</option>
+    <option value="Z">Ž</option>
+</select> <br>
+
+<label>Adresa</label>
+<input type="text" [(ngModel)]="address"><br>
+
+<label>Kontakt telefon</label>
+<input type="text" [(ngModel)]="phone"><br>
+
+<label>Mejl</label>
+<input type="text" [(ngModel)]="mail" placeholder="somebody@mail.com"><br>
+
+<label>Profilna slika</label>
+<input type="file" (change)="handleFileInput($event)"><br>
+
+<label>idR</label>
+<input type="text" [(ngModel)]="idR"><br>
+
+
+
+
+<button (click)="register()">Dodaj konobara</button> <br>
+<p>{{message}}</p> <br>
+<p>{{message2}}</p> <br>
+<p>{{message3}}</p>
