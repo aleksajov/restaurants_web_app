@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { HttpClient } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-waiter',
@@ -8,8 +9,24 @@ import { HttpClient } from '@angular/common/http';
   styleUrls: ['./add-waiter.component.css']
 })
 export class AddWaiterComponent {
-  constructor(private service: UserService, private http: HttpClient){}
+  constructor(private service: UserService, private http: HttpClient, private router:Router){}
   ngOnInit(): void {
+    let ls=localStorage.getItem("logged")
+    console.log(ls);
+    if(ls){
+      this.service.getUser(JSON.parse(ls)).subscribe(korisnik=>{
+        if(korisnik){
+          if(korisnik.type!=="admin")
+          {
+            alert("Admin nije ulogovan")
+            this.router.navigate(["loginAdmin"])
+          }
+        }
+      })
+    }else{
+      alert("Admin nije ulogovan")
+      this.router.navigate(["loginAdmin"])
+    }
     this.message=""
     this.message2=""
     this.message3=""

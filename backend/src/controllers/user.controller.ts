@@ -6,6 +6,14 @@ import { Request, Response } from 'express-serve-static-core';
 const crypto = require('crypto-js');
 
 export class UserController{
+    getWaiters= (req: express.Request, res: express.Response)=>{
+        let idRP=req.body.idR
+        UserM.find({idR:idRP, type:"waiter"}, { answer: 0, password: 0, salt: 0 }).then(data=>{
+            res.json(data)
+        }).catch(err=>{
+            console.log(err)
+        })
+    }
     addWaiter= (req: express.Request, res: express.Response)=>{
         const { username, password, question, answer, firstname, lastname,gender, address, phone, mail, idR, photo} = req.body;
         UserM.findOne({username:username}).then(user=>{
@@ -119,7 +127,7 @@ export class UserController{
             console.log(err);
         });
     }
-    getWaiters= (req: express.Request, res: express.Response)=>{
+    getAllWaiters= (req: express.Request, res: express.Response)=>{
         UserM.find({type:"waiter"}, { answer: 0, password: 0, salt: 0 }).then(data=>{
             res.json(data)
         }).catch(err=>{

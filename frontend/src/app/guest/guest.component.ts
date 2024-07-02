@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-guest',
@@ -7,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GuestComponent implements OnInit{
 
+  constructor(private router:Router){}
   loggedUsername:string=""
   ngOnInit(): void {
     let ls=localStorage.getItem("logged")
@@ -14,5 +16,8 @@ export class GuestComponent implements OnInit{
       this.loggedUsername=JSON.parse(ls)
     }
   }
-
+  logout(){
+    localStorage.removeItem("logged")
+    this.router.navigate(["login"])
+  }
 }

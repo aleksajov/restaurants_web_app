@@ -7,6 +7,44 @@ import { ParsedQs } from 'qs'
 
 
 export class ReservationController{
+    allRes= (req: express.Request, res: express.Response) => {
+        ReservationM.find().then(data=>{
+            res.json(data)
+        }).catch(err=>{
+            console.log(err)
+        })
+    }
+    getResforwaiter= (req: express.Request, res: express.Response) => {
+        let waiter=req.body.waiter
+        ReservationM.find({waiter: waiter}).then(data=>{
+            res.json(data)
+        }).catch(err=>{
+            console.log(err)
+        })
+    }
+    number= (req: express.Request, res: express.Response) => {
+        let array=[]
+        array.push(0)
+        array.push(0)
+        array.push(0)
+        const curr=new Date().getTime()
+        ReservationM.find().then(data=>{
+            data.forEach(element => {
+                if(element && element.dateTime)
+                {
+                    if(curr-(30*24*60*60*1000)<new Date(element!.dateTime).getTime() && new Date(element!.dateTime).getTime()<curr)
+                        array[0]++
+                    if(curr-(7*24*60*60*1000)<new Date(element!.dateTime).getTime() && new Date(element!.dateTime).getTime()<curr)
+                        array[1]++
+                    if(curr-(24*60*60*1000)<new Date(element!.dateTime).getTime() && new Date(element!.dateTime).getTime()<curr)
+                        array[2]++
+                }
+            })
+            res.json(array)
+        }).catch(err=>{
+            console.log(err)
+        })
+    }
     didntCame= (req: express.Request, res: express.Response) => {
         let dataP=req.body.reservation
         ReservationM.deleteOne({username: dataP.username, restaurantId: dataP.restaurantId, dateTime: dataP.dateTime, number: dataP.number, description: dataP.description}).then(data=>{

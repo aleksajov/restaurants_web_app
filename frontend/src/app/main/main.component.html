@@ -1,31 +1,58 @@
-<h1>Kutak dobre hrane</h1>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container">
+    <a class="navbar-brand">Kutak dobre hrane</a>
+    <div class="navbar-collapse">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/login">Prijavite se</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/register">Registrujte se</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
 
-<a routerLink="/login">Prijavite se</a>
-<a routerLink="/register">Registrujte se</a> <br>
-<div>
-    <p>Ukupan broj restorana: {{allRestaurants.length}} <br>
-    Ukupan broj registrovanih gostiju: {{allGuests.length}}
-    </p>
-</div>
-<div>
-    <p>Restorani</p>
+<div class="container mt-4">
+    <h2>Statistika</h2>
+    <p>Ukupan broj restorana: {{allRestaurants.length}}</p>
+    <p>Ukupan broj registrovanih gostiju: {{allGuests.length}}</p>
+    <p>Broj rezervacija u poslednjih mesec dana: {{numberReservations[0]}}</p>
+    <p>Broj rezervacija u poslednjih 7 dana: {{numberReservations[1]}}</p>
+    <p>Broj rezervacija u poslednjih 24h: {{numberReservations[2]}}</p>
+    
     <div>
-        <input type="text" placeholder="Pretraga po imenu" [(ngModel)]="searchName" (input)="filterRestaurants()">
-        <input type="text" placeholder="Pretraga po adresi" [(ngModel)]="searchAddress" (input)="filterRestaurants()">
-        <input type="text" placeholder="Pretraga po tipu" [(ngModel)]="searchType" (input)="filterRestaurants()">
-      </div>
-    <table>
-        <tr>
-            <th (click)="sortData('name')">Naziv</th>
-            <th (click)="sortData('address')">Adresa</th>
-            <th (click)="sortData('type')">Tip</th>
-            <th>Konobari</th>
-        </tr>
-        <tr *ngFor="let restaurant of combinedDataFiltered">
-            <td>{{ restaurant.name }}</td>
-            <td>{{ restaurant.address }}</td>
-            <td>{{ restaurant.type }}</td>
-            <td>{{ restaurant.waiters }}</td>
-          </tr>
-    </table>
+        <h3>Restorani</h3>
+        <div class="row mb-3">
+            <div class="col-4">
+                <input type="text" class="form-control mt-2" placeholder="Pretraga po imenu" [(ngModel)]="searchName" (input)="filterRestaurants()">
+            </div>
+            <div class="col-4">
+                <input type="text" class="form-control mt-2" placeholder="Pretraga po adresi" [(ngModel)]="searchAddress" (input)="filterRestaurants()">
+            </div>
+            <div class="col-4">
+                <input type="text" class="form-control mt-2" placeholder="Pretraga po tipu" [(ngModel)]="searchType" (input)="filterRestaurants()">
+            </div>
+            
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col" (click)="sortData('name')">Naziv</th>
+                    <th scope="col" (click)="sortData('address')">Adresa</th>
+                    <th scope="col" (click)="sortData('type')">Tip</th>
+                    <th scope="col">Konobari</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let restaurant of combinedDataFiltered">
+                    <td>{{ restaurant.name }}</td>
+                    <td>{{ restaurant.address }}</td>
+                    <td>{{ restaurant.type }}</td>
+                    <td>{{ restaurant.waiters }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>

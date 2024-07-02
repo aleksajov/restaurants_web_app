@@ -1,7 +1,6 @@
 
 
 <h3>Gost</h3>
-<a routerLink="/changePass">Promena lozinke</a>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -20,6 +19,12 @@
       </li>
       <li class="nav-item">
         <a class="nav-link" routerLink="deliveries">Dostava hrane</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/changePass">Promena lozinke</a>
+      </li>
+      <li class="nav-item">
+        <button (click)="logout()" class="btn">Izloguj se</button>
       </li>
     </ul>
   </div>

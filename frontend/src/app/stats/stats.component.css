@@ -1,0 +1,14 @@
+.chart{
+    display: flex;
+        align-items:
+            flex-end;
+        height: 200px;
+        gap: 10px;
+}
+
+.bar{
+    width: 20px; 
+    background-color: blue; 
+    color: white
+}
+

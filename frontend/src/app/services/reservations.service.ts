@@ -7,6 +7,18 @@ import { Reservation } from '../models/reservation';
   providedIn: 'root'
 })
 export class ReservationsService {
+  getAllReservations() {
+    return this.http.get<Reservation[]>('http://localhost:4000/reservations/allRes')
+  }
+  getReservationsForWaiter(waiter:string) {
+    let data={
+      waiter: waiter
+    }
+    return this.http.post<Reservation[]>('http://localhost:4000/reservations/getResforwaiter', data)
+  }
+  getNumberReservations(){
+    return this.http.get<number[]>('http://localhost:4000/reservations/number')
+  }
   didntCame(r: Reservation) {
     let data={
       reservation: r

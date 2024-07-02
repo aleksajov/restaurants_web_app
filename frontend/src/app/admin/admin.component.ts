@@ -69,6 +69,10 @@ export class AdminComponent implements OnInit{
       }
     })
   }
+  logout(){
+    localStorage.removeItem("logged")
+    this.router.navigate(["loginAdmin"])
+  }
 
 
   constructor(private restaurantService:RestaurantService, private userService:UserService, private router:Router) { }

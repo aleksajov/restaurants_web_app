@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-waiter',
@@ -12,5 +13,11 @@ export class WaiterComponent implements OnInit{
     if(ls){
       this.loggedUsername=JSON.parse(ls)
     }
+  }
+
+  constructor(private router:Router) { }
+  logout(){
+    localStorage.removeItem("logged")
+    this.router.navigate(["login"])
   }
 }

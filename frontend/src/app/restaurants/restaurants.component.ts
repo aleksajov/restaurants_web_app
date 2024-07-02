@@ -16,7 +16,7 @@ export class RestaurantsComponent implements OnInit{
 
   allRestaurants: Restaurant[]=[]
   allWaiters: User[]=[]
-  combinedData: any[] = [];
+  combinedData: any[] = []
 
   constructor(private service:RestaurantService, private userS: UserService, private resService: ReservationsService, private router:Router){}
 
@@ -25,20 +25,20 @@ export class RestaurantsComponent implements OnInit{
   }
   async initialize(): Promise<void> {
     try {
-      const restaurants = await lastValueFrom(this.service.getAllRestaurants());
-      const waiters = await lastValueFrom(this.userS.getAllWaiters());
+      const restaurants = await lastValueFrom(this.service.getAllRestaurants())
+      const waiters = await lastValueFrom(this.userS.getAllWaiters())
       
       if (restaurants) {
-        this.allRestaurants = restaurants;
+        this.allRestaurants = restaurants
       }
       
       if (waiters) {
-        this.allWaiters = waiters;
+        this.allWaiters = waiters
       }
   
-      await this.combineData();
+      await this.combineData()
     } catch (error) {
-      console.error('Greška pri učitavanju', error);
+      console.error('Greška pri učitavanju', error)
     }
   }
 
@@ -48,16 +48,19 @@ export class RestaurantsComponent implements OnInit{
 
 async combineData(): Promise<void> {
   const combinedDataPromises = this.allRestaurants.map(async restaurant => {
-    const waiters = restaurant.waiters.map(username => {
-      const user = this.allWaiters.find(user => user.username === username);
-      return user ? `${user.firstname} ${user.lastname}` : '';
-    }).filter(name => name).join(', ');
+    
+    const waitersList = await lastValueFrom(this.userS.getWaiters(restaurant.id))
+     let waiters: string = ""
+     waitersList.forEach(element => {
+      waiters+=element.firstname+" "+element.lastname+", "
+     })
+     waiters = waiters.slice(0, -2)
 
-    let avgGrade: number;
+    let avgGrade: number
     try {
-      avgGrade = await lastValueFrom(this.resService.getAvgGrade(restaurant.id));
+      avgGrade = await lastValueFrom(this.resService.getAvgGrade(restaurant.id))
     } catch {
-      avgGrade = -1;
+      avgGrade = -1
     }
 
     return {
@@ -67,11 +70,11 @@ async combineData(): Promise<void> {
       type: restaurant.type,
       waiters,
       avg: avgGrade === -1 ? "Još nema ocena" : avgGrade.toString()
-    };
-  });
+    }
+  })
 
-  this.combinedData = await Promise.all(combinedDataPromises);
-  this.combinedDataFiltered = this.combinedData;
+  this.combinedData = await Promise.all(combinedDataPromises)
+  this.combinedDataFiltered = this.combinedData
 }
 
 
@@ -85,8 +88,8 @@ filterRestaurants() {
   this.combinedDataFiltered = this.combinedData.filter(restaurant => {
     return (!this.searchName || restaurant.name.toLowerCase().includes(this.searchName.toLowerCase())) &&
             (!this.searchAddress || restaurant.address.toLowerCase().includes(this.searchAddress.toLowerCase())) &&
-            (!this.searchType || restaurant.type.toLowerCase().includes(this.searchType.toLowerCase()));
-    });
+            (!this.searchType || restaurant.type.toLowerCase().includes(this.searchType.toLowerCase()))
+    })
   }
 
   isNumber(avg: string){
@@ -95,10 +98,10 @@ filterRestaurants() {
 
 
 
-  combinedDataFiltered: any[] = [];
+  combinedDataFiltered: any[] = []
 
-  searchName: string = '';
-  searchAddress: string = '';
-  searchType: string = '';
+  searchName: string = ''
+  searchAddress: string = ''
+  searchType: string = ''
 
 }

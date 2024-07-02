@@ -7,6 +7,12 @@ import { Message } from '../models/message';
   providedIn: 'root'
 })
 export class UserService {
+  getWaiters(id: number) {
+    let data={
+      idR:id
+    }
+    return this.http.post<User[]>('http://localhost:4000/users/getWaiters', data)
+  }
   addWaiter(data: any) {
     return this.http.post<Message>('http://localhost:4000/users/addWaiter', data)
   }
@@ -37,7 +43,7 @@ export class UserService {
     return this.http.get<User[]>('http://localhost:4000/users/getUsers')
   }
   getAllWaiters() {
-    return this.http.get<User[]>('http://localhost:4000/users/getWaiters')
+    return this.http.get<User[]>('http://localhost:4000/users/getAllWaiters')
   }
   updateData(data: { newFirstname: string; newLastname: string; newMail: string; newPhone: string; newCard: string; newAddress: string; photo:string; username: string }) {
     return this.http.post<Message>('http://localhost:4000/users/updateData', data)

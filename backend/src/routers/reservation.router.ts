@@ -37,6 +37,15 @@ reservationRouter.route("/didntCame").post(
     (req,res)=>new ReservationController().didntCame(req,res)
 )
 
+reservationRouter.route("/number").get(
+    (req,res)=>new ReservationController().number(req,res)
+)
+reservationRouter.route("/getResforwaiter").post(
+    (req,res)=>new ReservationController().getResforwaiter(req,res)
+)
 
+reservationRouter.route("/allRes").get(
+    (req,res)=>new ReservationController().allRes(req,res)
+)
 
 export default reservationRouter;

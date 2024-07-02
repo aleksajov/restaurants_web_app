@@ -9,9 +9,7 @@ export class Restaurant{
     address: string=""
     type: string=""
     phone:string=""
-    comments: Array<string>=[]
     mapUrl: string=""
-    waiters: Array<string>=[]
     workingTime: Array<string>=[]
     tables: Array<Table>=[]
     menu: Array<Food>=[]

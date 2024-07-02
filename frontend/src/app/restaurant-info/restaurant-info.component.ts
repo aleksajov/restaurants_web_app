@@ -43,6 +43,7 @@ export class RestaurantInfoComponent implements OnInit{
     }
   }
 
+
   shortDesc: string=""
   numPeople: number=1
   dateTime:string=""

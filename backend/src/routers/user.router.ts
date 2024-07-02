@@ -33,8 +33,8 @@ userRouter.route("/changePassword").post(
     (req,res)=>new UserController().changePassword(req,res)
 )
 
-userRouter.route("/getWaiters").get(
-    (req,res)=>new UserController().getWaiters(req,res)
+userRouter.route("/getAllWaiters").get(
+    (req,res)=>new UserController().getAllWaiters(req,res)
 )
 userRouter.route("/getUsers").get(
     (req,res)=>new UserController().getUsers(req,res)
@@ -53,6 +53,10 @@ userRouter.route("/declineRegister").post(
 )
 userRouter.route("/addWaiter").post(
     (req,res)=>new UserController().addWaiter(req,res)
+)
+
+userRouter.route("/getWaiters").post(
+    (req,res)=>new UserController().getWaiters(req,res)
 )
 
 
