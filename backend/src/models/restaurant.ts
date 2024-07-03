@@ -9,8 +9,13 @@ const restaurantSchema = new mongoose.Schema(
         phone: String,
         mapUrl: String,
         workingTime: Array,
-        tables: [{idT:Number, numberSeats: Number, taken: Array}],
-        menu: Array
+        short_desc:String,
+        tables: [{idT:Number, numberSeats: Number, taken: Array, xCoord:Number,
+          yCoord:Number,
+          radius:Number}],
+        menu: Array,
+        kitchens:Array,
+        toilets:Array
     },{
       versionKey:false  
     }

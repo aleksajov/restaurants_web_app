@@ -24,6 +24,9 @@
         <option *ngFor="let t of acceptableTables" [value]="t.idT">{{t.numberSeats}} ljudi</option>
     </select>
 </div>
+<canvas id="canvas" width="800" height="600" style="border:1px solid #000;">
+    Your browser does not support the HTML canvas tag.
+</canvas>
 
 <form #form="ngForm" *ngIf="declineShow" (submit)="submit(form)">
     <input name="input" type="text" placeholder="Obavezan komentar" [(ngModel)]="declination" required>

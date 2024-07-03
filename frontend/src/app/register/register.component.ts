@@ -113,7 +113,7 @@ export class RegisterComponent implements OnInit{
           }
         })
         };
-        reader.readAsDataURL(this.photo);
+        reader.readAsDataURL(this.photo)
       } 
       else
       {
@@ -141,10 +141,10 @@ export class RegisterComponent implements OnInit{
               }
             })
           };
-          reader.readAsDataURL(response);
+          reader.readAsDataURL(response)
         },
         error: (error) => {
-          console.error('Greška pri učitavanju podrazumevane slike:', error);
+          console.error('Greška pri učitavanju podrazumevane slike:', error)
         }
       });
   }
@@ -195,8 +195,8 @@ export class RegisterComponent implements OnInit{
               
             }
             
-          };
-        };
+          }
+        }
 
         reader.readAsDataURL(file);
       }

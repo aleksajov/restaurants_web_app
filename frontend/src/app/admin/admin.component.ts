@@ -21,22 +21,29 @@ export class AdminComponent implements OnInit{
     let ls=localStorage.getItem("logged")
     if(ls){
       this.loggedUsername=JSON.parse(ls)
-      this.userService.getAllUsers().subscribe(data=>{
-        if(data){
-          this.guests=data.filter(user=>user.type=="guest")
-          this.waiters=data.filter(user=>user.type=="waiter")
-        }
+      this.userService.getUser(this.loggedUsername).subscribe(data=>{
+        this.logged=data
+        this.userService.getAllUsers().subscribe(data=>{
+          if(data){
+            this.guests=data.filter(user=>user.type=="guest")
+            this.waiters=data.filter(user=>user.type=="waiter")
+          }
+        })
+        this.restaurantService.getAllRestaurants().subscribe(data=>{
+          if(data){
+            this.allRestaurants=data
+          }
+        })
+        this.userService.getRegisterRequests().subscribe(data=>{
+          if(data){
+            this.registerRequests=data
+          }
+        })
       })
-      this.restaurantService.getAllRestaurants().subscribe(data=>{
-        if(data){
-          this.allRestaurants=data
-        }
-      })
-      this.userService.getRegisterRequests().subscribe(data=>{
-        if(data){
-          this.registerRequests=data
-        }
-      })
+    }
+    else{
+      alert("admin nije ulogovan")
+      this.router.navigate(["loginAdmin"])
     }
   }
   update(username: string){
@@ -70,7 +77,8 @@ export class AdminComponent implements OnInit{
     })
   }
   logout(){
-    localStorage.removeItem("logged")
+    localStorage.clear();
+    //localStorage.removeItem("logged")
     this.router.navigate(["loginAdmin"])
   }
 

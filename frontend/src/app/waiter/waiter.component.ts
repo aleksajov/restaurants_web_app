@@ -18,6 +18,6 @@ export class WaiterComponent implements OnInit{
   constructor(private router:Router) { }
   logout(){
     localStorage.removeItem("logged")
-    this.router.navigate(["login"])
+    this.router.navigate([""])
   }
 }

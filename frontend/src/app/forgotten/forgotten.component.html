@@ -1,17 +1,48 @@
-<h3>Zaboravljena lozinka</h3>
-
-<label>Korisničko ime:</label><input type="text" [(ngModel)]="username" [disabled]="showNew"><button (click)="click()" [disabled]="showNew">Potvrdi</button>
-<br>
-<div *ngIf="show">
-    <p>Bezbednosno pitanje: {{logged?logged.question:"null"}}</p>
-    <label>Odgovor:</label><input type="text" [(ngModel)]="answerQuest">
-    <button (click)="answer()">Potvrdi</button>
-</div>
-<div *ngIf="showNew">
-    <label>Unesite novu lozinku:</label><input type="password" [(ngModel)]="newPass1"> <br>
-    <label>Potvrdite novu lozinku:</label><input type="password" [(ngModel)]="newPass2"> <br>
-    <button (click)="change()">Promeni</button>
+<div class="d-flex justify-content-center align-items-center" style="height: 30vh;">
+    <h2 class="text-center mb-4">Zaboravljena lozinka</h2>
 </div>
 
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-2">
+            <label>Korisničko ime:</label>
+        </div>
+        <div class="col-2">
+            <input type="text" [(ngModel)]="username" [disabled]="showNew" class="form-control">
+        </div>
+        <div class="col-2">
+            <button (click)="click()" [disabled]="showNew" class="btn btn-primary">Potvrdi</button>
+        </div>
+    </div>
+    <div class="row justify-content-center mt-4" *ngIf="show">
+        
+            <div class="col-2">
+                <p>Bezbednosno pitanje: {{logged?logged.question:"null"}}</p>
+            </div>
+            <div class="col-2">
+                <input type="text" [(ngModel)]="answerQuest" class="form-control" placeholder="Odgovor">
+            </div>
+            <div class="col-2">
+                <button (click)="answer()"class="btn btn-primary">Potvrdi</button>
+            </div>
+            
+    </div>
+    <div class="row justify-content-center mt-7" *ngIf="showNew">
+        
+        <div class="col-2 mt-3">
+            <input type="password" [(ngModel)]="newPass1" placeholder="Unesite novu lozinku:" class="form-control">
+        </div>
+        <div class="col-2 mt-3">
+            <input type="password" [(ngModel)]="newPass2" placeholder="Potvrdite novu lozinku:" class="form-control">
+        </div>
+        <div class="col-2 mt-3">
+            <button (click)="change()" class="btn btn-primary">Promeni</button>
+        </div>
+            
+    </div>
+</div>
 
-<p>{{message}}</p>
+
+
+
+<p class="text-center mt-4 text-danger fs-5">{{message}}</p>

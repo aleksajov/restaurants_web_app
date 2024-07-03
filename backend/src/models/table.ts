@@ -4,7 +4,10 @@ const tableSchema = new mongoose.Schema(
     {
         idT: Number,
         taken: Array,
-        numberSeats: Number
+        numberSeats: Number,
+        xCoord:Number,
+        yCoord:Number,
+        radius:Number
     },{
       versionKey:false  
     }

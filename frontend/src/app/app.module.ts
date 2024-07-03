@@ -24,6 +24,7 @@ import { DeliveriesWaiterComponent } from './deliveries-waiter/deliveries-waiter
 import { ReservationsWaiterComponent } from './reservations-waiter/reservations-waiter.component';
 import { UpdateUserComponent } from './update-user/update-user.component';
 import { AddWaiterComponent } from './add-waiter/add-waiter.component';
+import { AddRestaurantComponent } from './add-restaurant/add-restaurant.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { AddWaiterComponent } from './add-waiter/add-waiter.component';
     DeliveriesWaiterComponent,
     ReservationsWaiterComponent,
     UpdateUserComponent,
-    AddWaiterComponent
+    AddWaiterComponent,
+    AddRestaurantComponent
   ],
   imports: [
     BrowserModule,

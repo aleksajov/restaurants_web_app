@@ -80,6 +80,10 @@ export class OrderController{
             if(data1 && data1.workingTime)
             {
                 const currDay=new Date().getDay()
+                if(data1.workingTime[currDay]==="/"){
+                    res.json({"msg":"Restoran ne radi danas"})
+                    return
+                }
                 const currHours=new Date().getHours()
                 const currMinutes=new Date().getMinutes()
                 const openingTimeHours=data1.workingTime[currDay].split("-")[0].split(":")[0]

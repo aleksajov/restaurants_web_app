@@ -1,7 +1,25 @@
-<h3>Admin</h3>
-<a routerLink="/changePass">Promena lozinke</a>
-<a routerLink="/addWaiter">Dodaj konobara</a>
-<button (click)="logout()">Logout</button>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand fw-bold">Admin</a>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item ">
+          <a class="nav-link" routerLink="/changePass">Promena lozinke</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/addWaiter">Dodaj konobara</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" routerLink="/addRestaurant">Dodaj restoran</a>
+          </li>
+        <li class="nav-item">
+          <button (click)="logout()" class="btn">Izloguj se</button>
+        </li>
+      </ul>
+    </div>
+  </nav>
 
 <hr>
 <div>

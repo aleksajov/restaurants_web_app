@@ -18,6 +18,6 @@ export class GuestComponent implements OnInit{
   }
   logout(){
     localStorage.removeItem("logged")
-    this.router.navigate(["login"])
+    this.router.navigate([""])
   }
 }

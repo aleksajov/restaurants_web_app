@@ -1,4 +1,5 @@
 import { Food } from "./food"
+import { KitchenToilet } from "./kitchentoilet"
 import { Table } from "./table"
 
 //свако јело има назив, слику, цену и излистане састојке
@@ -13,5 +14,8 @@ export class Restaurant{
     workingTime: Array<string>=[]
     tables: Array<Table>=[]
     menu: Array<Food>=[]
+    kitchens: Array<KitchenToilet>=[]
+    toilets:Array<KitchenToilet>=[]
+    short_desc:string=""
 }
 
