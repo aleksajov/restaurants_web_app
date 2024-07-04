@@ -1,16 +1,33 @@
-<p>
-    Ime: {{logged.firstname}} <input type="text" [(ngModel)]="newFirstname" placeholder="Novo ime"> <br>
-    Prezime: {{logged.lastname}} <input type="text" [(ngModel)]="newLastname" placeholder="Novo prezime"> <br>
-    Mejl: {{logged.mail}} <input type="text" [(ngModel)]="newMail" placeholder="Novo ime"> <br>
-    Adresa: {{logged.address}} <input type="text" [(ngModel)]="newAddress" placeholder="Nova adresa"> <br>
-    Kontakt telefon: {{logged.phone}} <input type="text" [(ngModel)]="newPhone" placeholder="Novi br. tel."> <br>
+<div class="container mt-3">
+    <h4>Ažuriraj podatke</h4>
+    <div class="mb-3">
+        Ime: {{logged.firstname}} <input type="text" class="form-control" [(ngModel)]="newFirstname" placeholder="Novo ime">        
+    </div>
+    <div class="mb-3">
+        Prezime: {{logged.lastname}} <input type="text" class="form-control" [(ngModel)]="newLastname" placeholder="Novo prezime">
+    </div>
+    <div class="mb-3">
+        Mejl: {{logged.mail}} <input type="text" class="form-control" [(ngModel)]="newMail" placeholder="Novo ime">
+    </div>
+    <div class="mb-3">
+        Adresa: {{logged.address}} <input type="text" class="form-control" [(ngModel)]="newAddress" placeholder="Nova adresa">
+    </div>
+    <div class="mb-3">
+        Kontakt telefon: {{logged.phone}} <input type="text" class="form-control" [(ngModel)]="newPhone" placeholder="Novi br. tel.">
+    </div>
     <ng-container *ngIf='logged.type=="guest"'>
-        Br. kartice: {{logged.card}} <input type="text" [(ngModel)]="newCard" placeholder="Novi br. kartice"> <br>
+        <div class="mb-3">
+            Br. kartice: {{logged.card}} <input type="text" class="form-control" [(ngModel)]="newCard" placeholder="Novi br. kartice">
+        </div>
     </ng-container>
-    Profilna slika: <img [src]="logged.photo" alt="Photo?"><input type="file" (change)="handleFileInput($event)"><br>
-</p>
+    <div class="mb-3">
+        Profilna slika: <img [src]="logged.photo" alt="Photo?" class="img-fluid"><input type="file" class="form-control" (change)="handleFileInput($event)">
+    </div>
 
-<button (click)="confirm()">Potvrdi izmene</button> <br>
+    <button class="btn btn-primary" (click)="confirm()">Potvrdi izmene</button>
+    <div class="mt-3">
+        <p>{{message}}</p>
+        <p>{{message2}}</p>
+    </div>
+</div>
 
-<p>{{message}}</p>
-<p>{{message2}}</p>

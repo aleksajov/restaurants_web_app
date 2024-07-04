@@ -80,7 +80,7 @@ async combineData(): Promise<void> {
 
 show(id:number){
   localStorage.setItem("showRestaurant", JSON.stringify(this.allRestaurants.find(restaurant=>restaurant.id==id)))
-  this.router.navigate(['/restaurantInfo'])
+  this.router.navigate(['guest/restaurantInfo'])
 }
   
 

@@ -12,7 +12,6 @@ export class AddWaiterComponent {
   constructor(private service: UserService, private http: HttpClient, private router:Router){}
   ngOnInit(): void {
     let ls=localStorage.getItem("logged")
-    console.log(ls);
     if(ls){
       this.service.getUser(JSON.parse(ls)).subscribe(korisnik=>{
         if(korisnik){

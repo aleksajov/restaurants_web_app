@@ -86,6 +86,7 @@ export class RestaurantInfoComponent implements OnInit{
   boolOrder:boolean=false
 
   addToCart(){
+    console.log(this.cart)
     for(let i=0;i<this.howMany.length;i++){
       let found = this.cart.find(item => item.idF === this.currRestaurant.menu[i].idF);
       if(found){
@@ -109,6 +110,7 @@ export class RestaurantInfoComponent implements OnInit{
   }
 
   order(){
+    console.log(this.cart)
     if(this.cart.length==0){
       this.message2="Morate izabrati bar jedno jelo"
     }

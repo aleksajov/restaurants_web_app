@@ -1,63 +1,87 @@
-<h2>Informacije o restoranu</h2>
 
-Naziv restorana: {{currRestaurant.name}}<br>
-Adresa restorana: {{currRestaurant.address}}<br>
-Tip restorana: {{currRestaurant.type}}<br>
-Telefon restorana: {{currRestaurant.phone}}<br>
+<div class="container mt-4">
+  <h2>Informacije o restoranu</h2>
+  <p>Naziv restorana: {{currRestaurant.name}}</p>
+  <p>Adresa restorana: {{currRestaurant.address}}</p>
+  <p>Tip restorana: {{currRestaurant.type}}</p>
+  <p>Telefon restorana: {{currRestaurant.phone}}</p>
 
-<h4>Lokacija</h4>
-<iframe
-  width="600"
-  height="450"
-  style="border:0"
-  loading="lazy"
-  [src]="mapUrl" allowfullscreen>
-</iframe>
-<hr>
-<h4>Rezervacija stola</h4>
-
-<form #form="ngForm" (ngSubmit)="submit(form)">
-  <label for="dateTime">Datum i vreme:</label>
-  <input type="datetime-local" name="dateTime" id="dateTime" [(ngModel)]="dateTime" required><br>
-  <label for="numPeople">Broj osoba:</label>
-  <input type="number" name="numPeople" id="numPeople" [(ngModel)]="numPeople" required><br>
-  <label for="shortDesc">Kratak opis:</label>
-  <textarea id="shortDesc" name="shortDesc" [(ngModel)]="shortDesc"></textarea><br>
-  <button type="submit">Rezerviši</button>
-</form>
-<p>{{message}}</p>
-
-<hr>
-<h4>Jelovnik</h4>
-<table>
-  <tr>
-    <th>Ime jela</th>
-    <th>Slika</th>
-    <th>Cena</th>
-    <th>Sastojci</th>
-    <th>Količina</th>
-  </tr>
-  <tr *ngFor="let item of currRestaurant.menu; let i=index">
-    <td>{{item.name}}</td>
-    <td><img [src]="item.photo" alt="*" style="width: 300px; height: 200px;"></td>
-    <td>{{item.cost}}</td>
-    <td>{{item.ingredients}}</td>
-    <td><input type="number" [(ngModel)]="howMany[i]" min="0"></td>
-  </tr> <br>
-  <button (click)="addToCart()">Ažuriraj korpu</button> <br>
-  <p>{{message2}}</p>
-<hr>
-<div>
-  <h4>Korpa</h4>
-  <table>
-    <tr>
-      <th>Stavka</th>
-      <th>Količina</th>
-    </tr>
-    <tr *ngFor="let item of cart">
-      <td>{{currRestaurant.menu[item.idF].name}}</td>
-      <td>{{item.quantity}}</td>
-    </tr>
-  </table>
 </div>
-<button (click)="order()" [disabled]="!boolOrder">Poručite</button>
+<div class="container mt-5">
+    <h4>Lokacija</h4>
+  <iframe
+    width="600"
+    height="600"
+    style="border:0"
+    loading="lazy"
+    [src]="mapUrl">
+  </iframe>
+</div>
+
+<hr>
+
+
+<div class="container mt-5">
+  <h4>Rezervacija stola</h4>
+  <form #form="ngForm" (ngSubmit)="submit(form)">
+    <label for="dateTime">Datum i vreme:</label>
+    <input type="datetime-local" class="form-control"name="dateTime" id="dateTime" [(ngModel)]="dateTime" required><br>
+    <label for="numPeople">Broj osoba:</label>
+    <input type="number" name="numPeople" id="numPeople" class="form-control" [(ngModel)]="numPeople" required><br>
+    <label for="shortDesc">Kratak opis:</label>
+    <textarea id="shortDesc" name="shortDesc" class="form-control" [(ngModel)]="shortDesc"></textarea><br>
+    <button type="submit" class="btn btn-primary">Rezerviši</button>
+  </form>
+  <p>{{message}}</p>
+</div>
+
+
+<hr>
+  <div class="container mt-4">
+    <h4>
+      Jelovnik
+    </h4>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Ime jela</th>
+                <th scope="col">Slika</th>
+                <th scope="col">Cena</th>
+                <th scope="col">Sastojci</th>
+                <th scope="col">Količina</th>
+            </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of currRestaurant.menu; let i=index">
+            <td>{{item.name}}</td>
+            <td><img [src]="item.photo" alt="*" style="width: 300px; height: 200px;"></td>
+            <td>{{item.cost}}</td>
+            <td>{{item.ingredients}}</td>
+            <td><input type="number" [(ngModel)]="howMany[i]" class="form-control" min="0"></td>
+          </tr> 
+        </tbody>
+    </table>
+    <button (click)="addToCart()" class="btn btn-primary">Ažuriraj korpu</button> <br>
+    <p>{{message2}}</p>
+</div>
+<hr>
+<div class="container mt-4">
+  <h4>
+    Korpa
+  </h4>
+  <table class="table">
+      <thead>
+          <tr>
+              <th scope="col">Stavka</th>
+              <th scope="col">Količina</th>
+          </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of cart">
+          <td>{{currRestaurant.menu[item.idF].name}}</td>
+          <td>{{item.quantity}}</td>
+        </tr>
+      </tbody>
+  </table>
+  <button (click)="order()" [disabled]="!boolOrder" class="btn btn-primary">Poručite</button>
+</div>

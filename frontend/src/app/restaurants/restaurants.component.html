@@ -1,31 +1,42 @@
-<div>
-    <p>Restorani</p>
-    <div>
-        <input type="text" placeholder="Pretraga po imenu" [(ngModel)]="searchName" (input)="filterRestaurants()">
-        <input type="text" placeholder="Pretraga po adresi" [(ngModel)]="searchAddress" (input)="filterRestaurants()">
-        <input type="text" placeholder="Pretraga po tipu" [(ngModel)]="searchType" (input)="filterRestaurants()">
-      </div>
-    <table>
-        <tr>
-            <th>Naziv</th>
-            <th>Adresa</th>
-            <th>Tip</th>
-            <th>Konobari</th>
-            <th>Prosečna ocena</th>
-        </tr>
-        <tr *ngFor="let restaurant of combinedDataFiltered">
-            <td><a (click)="show(restaurant.id)">{{ restaurant.name }}</a></td>
-            <td>{{ restaurant.address }}</td>
-            <td>{{ restaurant.type }}</td>
-            <td>{{ restaurant.waiters }}</td>
-            <ng-container *ngIf="isNumber(restaurant.avg)">
-                <td>{{restaurant.avg | number:'1.2-2'}}</td>
-                <td *ngFor="let star of floor(restaurant.avg)">⭐</td>
-            </ng-container>
-            <ng-container *ngIf="isNumber(restaurant.avg)">
-                <td *ngFor="let star of floor(5 - restaurant.avg)">☆</td>
-            </ng-container>
-            <td *ngIf="!isNumber(restaurant.avg)">{{restaurant.avg}}</td>
-          </tr>
-    </table>
+<div class="container mt-4">
+    <h3>Restorani</h3>
+        <div class="row mb-3">
+            <div class="col-4">
+                <input type="text" class="form-control mt-2" placeholder="Pretraga po imenu" [(ngModel)]="searchName" (input)="filterRestaurants()">
+            </div>
+            <div class="col-4">
+                <input type="text" class="form-control mt-2" placeholder="Pretraga po adresi" [(ngModel)]="searchAddress" (input)="filterRestaurants()">
+            </div>
+            <div class="col-4">
+                <input type="text" class="form-control mt-2" placeholder="Pretraga po tipu" [(ngModel)]="searchType" (input)="filterRestaurants()">
+            </div>
+            
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Naziv</th>
+                    <th scope="col">Adresa</th>
+                    <th scope="col">Tip</th>
+                    <th scope="col">Konobari</th>
+                    <th scope="col">Prosečna ocena</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let restaurant of combinedDataFiltered">
+                    <td><a (click)="show(restaurant.id)">{{ restaurant.name }}</a></td>
+                    <td>{{ restaurant.address }}</td>
+                    <td>{{ restaurant.type }}</td>
+                    <td>{{ restaurant.waiters }}</td>
+                    <ng-container *ngIf="isNumber(restaurant.avg)">
+                        <td>{{restaurant.avg | number:'1.2-2'}}</td>
+                        <td *ngFor="let star of floor(restaurant.avg)">⭐</td>
+                    </ng-container>
+                    <ng-container *ngIf="isNumber(restaurant.avg)">
+                        <td *ngFor="let star of floor(5 - restaurant.avg)">☆</td>
+                    </ng-container>
+                    <td *ngIf="!isNumber(restaurant.avg)">{{restaurant.avg}}</td>
+                  </tr>
+            </tbody>
+        </table>
 </div>

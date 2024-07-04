@@ -22,87 +22,105 @@
   </nav>
 
 <hr>
-<div>
+<div class="container mt-4">
     <h4>
         Lista gostiju
     </h4>
-    <table>
-        <tr>
-            <th>Korisnicko ime</th>
-            <th>Ime i prezime</th>
-        </tr>
-        <tr *ngFor="let user of guests">
-            <td>
-                {{user.username}}
-            </td>
-            <td>
-                {{user.firstname}} {{user.lastname}}
-            </td>
-            <td><button (click)="update(user.username)">Ažuriraj podatke</button></td>
-        </tr>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Korisničko ime</th>
+                <th scope="col">Ime i prezime</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let user of guests">
+                <td>{{user.username}}</td>
+                <td>{{user.firstname}} {{user.lastname}}</td>
+                <td><button (click)="update(user.username)" class="btn">Ažuriraj podatke</button></td>
+            </tr>
+        </tbody>
     </table>
 </div>
-
-<div>
+<div class="container mt-4">
     <h4>
         Lista konobara
     </h4>
-    <table>
-        <tr>
-            <th>Korisnicko ime</th>
-            <th>Ime i prezime</th>
-        </tr>
-        <tr *ngFor="let user of waiters">
-            <td>
-                {{user.username}}
-            </td>
-            <td>
-                {{user.firstname}} {{user.lastname}}
-            </td>
-            <td><button (click)="update(user.username)">Ažuriraj podatke</button></td>
-        </tr>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Korisničko ime</th>
+                <th scope="col">Ime i prezime</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let user of waiters">
+                <td>{{user.username}}</td>
+                <td>{{user.firstname}} {{user.lastname}}</td>
+                <td><button (click)="update(user.username)" class="btn">Ažuriraj podatke</button></td>
+            </tr>
+        </tbody>
     </table>
 </div>
-
-<hr>
-<div>
+<div class="container mt-4">
     <h4>
         Lista restorana
     </h4>
-    <table>
-        <tr>
-            <th>IdR</th>
-            <th>Naziv</th>
-            <th>Adresa</th>
-        </tr>
-        <tr *ngFor="let r of allRestaurants">
-            <td>
-                {{r.id}}
-            </td>
-            <td>
-                {{r.name}}
-            </td>
-            <td>
-                {{r.address}}
-            </td>
-        </tr>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">IdR</th>
+                <th scope="col">Naziv</th>
+                <th scope="col">Adresa</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let r of allRestaurants">
+                <td>{{r.id}}</td>
+                <td>{{r.name}}</td>
+                <td>{{r.address}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<div class="container mt-4">
+    <h4>
+        Zahtevi za registracijom gostiju
+    </h4>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Korisničko ime</th>
+                <th scope="col">Mejl</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let r of registerRequests">
+                <td>{{r.username}}</td>
+            <td>{{r.mail}}</td>
+            <td><button (click)="accept(r.username)" class="btn btn-primary">Prihvati</button></td>
+            <td><button (click)="decline(r.username, r.mail)"class="btn btn-primary" id="decline">Odbij</button></td>
+            </tr>
+        </tbody>
     </table>
 </div>
 
 <hr>
+<div class="container mt-5">
+    <h6>Dodavanje jela u restoran</h6>
+    <div class="mb-3">
+        Naziv jela: <input type="text" class="form-control" [(ngModel)]="foodName" >        
+    </div>
+    <div class="mb-3">
+        Cena: <input type="number" min="0" class="form-control" [(ngModel)]="foodPrice" >
+    </div>
+    <div class="mb-3">
+        Sastojci: <input type="text" class="form-control" [(ngModel)]="ingredients" >        
+    </div>
+    <div class="mb-3">
+        IdR: <input type="number" min="0" class="form-control" [(ngModel)]="foodidR" >
+    </div>
+    
 
-<div>
-    <h4>Zahtevi za registracijom gostiju</h4>
-    <table>
-        <tr>
-            <th>Korisnicko ime</th>
-            <th>Mejl</th>
-        </tr>
-        <tr *ngFor="let r of registerRequests">
-            <td>{{r.username}}</td>
-            <td>{{r.mail}}</td>
-            <td><button (click)="accept(r.username)">Prihvati</button></td>
-            <td><button (click)="decline(r.username, r.mail)">Odbij</button></td>
-        </tr>
-    </table>
+    <button class="btn btn-primary" (click)="addFood()">Dodaj jelo</button>
 </div>

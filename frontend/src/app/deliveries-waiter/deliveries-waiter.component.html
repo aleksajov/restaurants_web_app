@@ -1,22 +1,28 @@
-<div>
-    <h4>Zahtevi za dostavu</h4>
-    <table>
-        <tr>
-            <th>Id</th>
-            <th>Podneo</th>
-            <th>Stavke</th>
-        </tr>
-        <tr *ngFor="let o of ordersPending; let ind=index">
-            <td>{{o.idO}}</td>
-            <td>{{o.username}}</td>
-            <td *ngFor="let i of o.items">{{i.name}}:{{i.quantity}}</td>
-            <td><select [(ngModel)]="selectedTimes[ind]" (change)="onSelect(o.idO, ind)">
-                <option value="30">20-30 minuta</option>
-                <option value="40">30-40 minuta</option>
-                <option value="60">50-60 minuta</option>
-            </select></td>
-            <td><button (click)="reject(o.idO)">Odbij</button></td>
-        </tr>
+<div class="container mt-4">
+    <h4>
+        Zahtevi za dostavu
+    </h4>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Podneo</th>
+                <th scope="col">Stavke</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let o of ordersPending; let ind=index">
+                <td>{{o.idO}}</td>
+                <td>{{o.username}}</td>
+                <td *ngFor="let i of o.items">{{i.name}}:{{i.quantity}}</td>
+                <td><select [(ngModel)]="selectedTimes[ind]" (change)="onSelect(o.idO, ind)" class="form-select">
+                    <option value="30">20-30 minuta</option>
+                    <option value="40">30-40 minuta</option>
+                    <option value="60">50-60 minuta</option>
+                </select></td>
+                <td><button (click)="reject(o.idO)" class="btn">Odbij</button></td>
+            </tr>
+        </tbody>
     </table>
 </div>
 

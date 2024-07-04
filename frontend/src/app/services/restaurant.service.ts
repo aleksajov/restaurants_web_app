@@ -9,6 +9,9 @@ import { KitchenToilet } from '../models/kitchentoilet';
   providedIn: 'root'
 })
 export class RestaurantService {
+  addFood(data: { name: string; price: number; ingredients: string; idR: number; }) {
+    return this.http.post<number>('http://localhost:4000/restaurants/addFood', data)
+  }
   getToiletsForRestaurant(restaurantId: number) {
     let data={
       restaurant:restaurantId
@@ -21,7 +24,7 @@ export class RestaurantService {
     }
     return this.http.post<KitchenToilet[]>('http://localhost:4000/restaurants/getKitchens', data)
   }
-  addRestaurant(data: { name: string; address: string; type: string; phone: string; workingTime: string[]; tables: Table[]; kitchens: import("../models/kitchentoilet").KitchenToilet[]; toilets: import("../models/kitchentoilet").KitchenToilet[]; short_desc:string;}) {
+  addRestaurant(data: { name: string; address: string; type: string; phone: string; workingTime: string[]; tables: Table[]; kitchens: import("../models/kitchentoilet").KitchenToilet[]; toilets: import("../models/kitchentoilet").KitchenToilet[]; short_desc:string; map_url:string;}) {
     return this.http.post<Message>('http://localhost:4000/restaurants/addRestaurant', data)
   }
   getTablesForRestaurant(restaurantId: number) {

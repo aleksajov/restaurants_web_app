@@ -1,52 +1,74 @@
-<div>
-    <h4>U obradi</h4>
-    <table>
-        <tr>
-            <th>Naziv restorana</th>
-            <th>Datum i vreme</th>
-            <th>Broj ljudi</th>
-            <th>Opis</th>
-        </tr>
-        <tr *ngFor="let p of pendingReservations">
-            <td>{{p.restaurantName}}</td>
-            <td>{{p.dateTime.split('T')[0]}} {{p.dateTime.split('T')[1]}}</td>
-            <td>{{p.number}}</td>
-            <td>{{p.description}}</td>
-        </tr>
+
+<div class="container mt-4">
+    <h4>
+        U obradi
+    </h4>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Naziv restorana</th>
+                <th scope="col">Datum i vreme</th>
+                <th scope="col">Broj ljudi</th>
+                <th scope="col">Opis</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let p of pendingReservations">
+                <td>{{p.restaurantName}}</td>
+                <td>{{p.dateTime.split('T')[0]}} {{p.dateTime.split('T')[1]}}</td>
+                <td>{{p.number}}</td>
+                <td>{{p.description}}</td>
+            </tr>
+        </tbody>
     </table>
 </div>
 
-<div>
-    <h4>Aktivne rezervacije</h4>
-    <table>
-        <tr>
-            <th>Naziv restorana</th>
-            <th>Adresa</th>
-            <th>Datum i vreme</th>
-        </tr>
-        <tr *ngFor="let p of activeReservations">
-            <td>{{p.restaurantName}}</td>
-            <td>{{p.restaurantAddress}}</td>
-            <td>{{p.dateTime.split('T')[0]}} {{p.dateTime.split('T')[1]}}</td>
-            <td *ngIf="checkTime(p)"><button (click)="cancel(p)">Otkaži</button></td>
-        </tr>
+
+<div class="container mt-4">
+    <h4>
+        Aktivne rezervacije
+    </h4>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Naziv restorana</th>
+                <th scope="col">Adresa</th>
+                <th scope="col">Datum i vreme</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let p of activeReservations">
+                <td>{{p.restaurantName}}</td>
+                <td>{{p.restaurantAddress}}</td>
+                <td>{{p.dateTime.split('T')[0]}} {{p.dateTime.split('T')[1]}}</td>
+                <td *ngIf="checkTime(p)"><button (click)="cancel(p)"class="btn">Otkaži</button></td>
+            </tr>
+        </tbody>
     </table>
 </div>
 
-<div>
-    <h4>Arhiva rezervacija</h4>
-    <table>
-        <tr>
-            <th>Naziv restorana</th>
-            <th>Datum i vreme</th>
-            <th>Komentar</th>
-            <th>Ocena</th>
-        </tr>
-        <tr *ngFor="let p of expiredReservations">
-            <td>{{p.restaurantName}}</td>
-            <td>{{p.dateTime.split('T')[0]}} {{p.dateTime.split('T')[1]}}</td>
-            <td>{{p.comment=="" ? "Nije komentarisano": p.comment}}</td>
-            <td>{{p.grade==-1? "Nije ocenjeno": p.grade}}</td>
-        </tr>
+
+
+<div class="container mt-4">
+    <h4>
+        Arhiva rezervacija
+    </h4>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Naziv restorana</th>
+                <th scope="col">Datum i vreme</th>
+                <th scope="col">Komentar</th>
+                <th scope="col">Ocena</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let p of expiredReservations">
+                <td>{{p.restaurantName}}</td>
+                <td>{{p.dateTime.split('T')[0]}} {{p.dateTime.split('T')[1]}}</td>
+                <td>{{p.comment=="" ? "Nije komentarisano": p.comment}}</td>
+                <td>{{p.grade==-1? "Nije ocenjeno": p.grade}}</td>
+            </tr>
+        </tbody>
     </table>
 </div>

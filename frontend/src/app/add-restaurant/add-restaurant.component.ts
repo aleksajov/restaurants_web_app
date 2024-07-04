@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { read } from '@popperjs/core';
 import { ReadedDataModel } from '../models/readedData';
 import { RestaurantService } from '../services/restaurant.service';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-add-restaurant',
@@ -29,14 +30,15 @@ export class AddRestaurantComponent implements OnInit{
       this.router.navigate(["loginAdmin"])
     }
   }
-  name:string="Aleksin restoran"
-  type:string="aleksin"
-  address:string="Alekse 12"
-  short_desc:string="dobar restoran"
-  contact:string="655033998"
+  name:string=""
+  type:string=""
+  address:string=""
+  short_desc:string=""
+  contact:string=""
   workingTime:string[]=new Array(7).fill("")
   jsonFile:File | null=null
   readedData: ReadedDataModel=new ReadedDataModel()
+  map_url:string=""
 
   constructor(private service:UserService, private router:Router, private restaurantService:RestaurantService){}
 
@@ -73,7 +75,7 @@ export class AddRestaurantComponent implements OnInit{
   }
 
   addRestaurant(){
-    if(this.name=="" || this.type=="" || this.address=="" || this.short_desc=="" || this.contact==""){
+    if(this.name=="" || this.type=="" || this.address==""  || this.contact==""){
       alert("Popunite sva polja")
       return
     }
@@ -119,7 +121,8 @@ export class AddRestaurantComponent implements OnInit{
         tables: tables,
         kitchens:kitchens,
         toilets:toilets,
-        short_desc:this.short_desc
+        short_desc:this.short_desc,
+        map_url:this.map_url
     }
     this.restaurantService.addRestaurant(data).subscribe(data=>{
       if(data){

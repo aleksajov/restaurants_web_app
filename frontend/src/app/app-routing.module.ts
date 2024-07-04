@@ -29,6 +29,7 @@ const routes: Routes = [
     {path:"restaurants", component:RestaurantsComponent},
     {path:"reservations", component:ReservationsComponent},
     {path:"deliveries", component:DeliveriesComponent},
+  {path:"restaurantInfo", component:RestaurantInfoComponent}
   ]},
   {path:"admin", component:AdminComponent},
   {path:"waiter", component:WaiterComponent, children:[
@@ -43,7 +44,6 @@ const routes: Routes = [
   {path:"", component:MainComponent},
   {path:"changePass", component:ChangePasswordComponent},
   {path:"forgotten", component:ForgottenComponent},
-  {path:"restaurantInfo", component:RestaurantInfoComponent},
   {path:"update", component:UpdateUserComponent},
   {path:"addWaiter", component:AddWaiterComponent},
   {path:"addRestaurant", component:AddRestaurantComponent}

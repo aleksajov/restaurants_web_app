@@ -7,7 +7,6 @@ import { Table } from '../models/table';
 import { RestaurantService } from '../services/restaurant.service';
 import { Form, NgForm } from '@angular/forms';
 import { KitchenToilet } from '../models/kitchentoilet';
-import { Colors } from 'chart.js';
 
 @Component({
   selector: 'app-reservations-waiter',
@@ -163,34 +162,34 @@ export class ReservationsWaiterComponent implements OnInit{
   if (!canvas.getContext) {
     return;
   }
-  const ctx = canvas.getContext('2d');
-  if (!ctx) {
+  const canvasContext = canvas.getContext('2d');
+  if (!canvasContext) {
     return;
   }
 
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  canvasContext.clearRect(0, 0, canvas.width, canvas.height);
 
 
-  const drawTable = (element: Table, color: string) => {
-    ctx.beginPath();
-    ctx.arc(element.xCoord, element.yCoord, element.radius, 0, Math.PI * 2);
+  const drawTable = (table: Table, color: string) => {
+    canvasContext.beginPath();
+    canvasContext.arc(table.xCoord, table.yCoord, table.radius, 0, Math.PI * 2);
     
-   ctx.fillText(element.numberSeats.toString(), element.xCoord, element.yCoord)
-   ctx.stroke()
+   canvasContext.fillText(table.numberSeats.toString(), table.xCoord, table.yCoord)
+   canvasContext.stroke()
   };
 
-  const drawToilet = (element: KitchenToilet, color: string) => { 
-    ctx.beginPath();
-    ctx.rect(element.xCoord, element.yCoord, element.width, element.height);
+  const drawToilet = (toilet: KitchenToilet, color: string) => { 
+    canvasContext.beginPath();
+    canvasContext.rect(toilet.xCoord, toilet.yCoord, toilet.width, toilet.height);
     
-    ctx.fillText("Toalet",element.xCoord, element.yCoord)
-    ctx.stroke()
+    canvasContext.fillText("Toalet",toilet.xCoord, toilet.yCoord)
+    canvasContext.stroke()
   };
-  const drawKitchen = (element: KitchenToilet, color: string) => { 
-    ctx.beginPath();
-    ctx.rect(element.xCoord, element.yCoord, element.width, element.height);
-    ctx.fillText("Kuhinja",element.xCoord, element.yCoord)
-    ctx.stroke()
+  const drawKitchen = (kitchen: KitchenToilet, color: string) => { 
+    canvasContext.beginPath();
+    canvasContext.rect(kitchen.xCoord, kitchen.yCoord, kitchen.width, kitchen.height);
+    canvasContext.fillText("Kuhinja",kitchen.xCoord, kitchen.yCoord)
+    canvasContext.stroke()
   };
 
   this.allTables.forEach(table => drawTable(table, 'blue'));
@@ -263,16 +262,16 @@ export class ReservationsWaiterComponent implements OnInit{
     if (!canvas.getContext) {
       return;
     }
-    const ctx = canvas.getContext('2d');
-    if (!ctx) {
+    const canvasContext = canvas.getContext('2d');
+    if (!canvasContext) {
       return;
     }
-    ctx.beginPath();
-    let element=this.acceptableTables.find(table=>table.idT==selectedTableId)
-    if(element){
-      ctx.arc(element.xCoord, element.yCoord, element.radius, 0, Math.PI * 2);
-      ctx.fillStyle = "red"
-      ctx.fill()
+    canvasContext.beginPath();
+    let table=this.acceptableTables.find(table=>table.idT==selectedTableId)
+    if(table){
+      canvasContext.arc(table.xCoord, table.yCoord, table.radius, 0, Math.PI * 2);
+      canvasContext.fillStyle = "red"
+      canvasContext.fill()
     }
 
 

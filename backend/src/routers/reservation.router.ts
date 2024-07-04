@@ -48,4 +48,7 @@ reservationRouter.route("/allRes").get(
     (req,res)=>new ReservationController().allRes(req,res)
 )
 
+reservationRouter.route("/cancel").post(
+    (req,res)=>new ReservationController().cancel(req,res)
+)
 export default reservationRouter;

@@ -47,6 +47,10 @@ export class UpdateUserComponent implements OnInit{
         this.logged=user
       })
     }
+    else{
+      alert("Admin nije ulogovan")
+      this.router.navigate(['loginAdmin'])
+    }
   }
 
   confirm(){

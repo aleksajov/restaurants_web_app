@@ -82,6 +82,30 @@ export class AdminComponent implements OnInit{
     this.router.navigate(["loginAdmin"])
   }
 
+  foodName:string=""
+  foodPrice:number=-1
+  ingredients:string=""
+  foodidR:number=-1
+
+  addFood(){
+    let data={
+      name:this.foodName,
+      price: this.foodPrice,
+      ingredients:this.ingredients,
+      idR: this.foodidR
+    }
+    this.restaurantService.addFood(data).subscribe(data=>{
+      if(data==0){
+        alert("jelo dodato")
+        this.foodName=""
+        this.foodPrice=0
+        this.ingredients=""
+        this.foodidR=0
+      }
+    })
+
+  }
+
 
   constructor(private restaurantService:RestaurantService, private userService:UserService, private router:Router) { }
 }

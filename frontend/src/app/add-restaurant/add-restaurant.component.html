@@ -1,5 +1,6 @@
 <div class="d-flex justify-content-center align-items-center" style="height: 10vh;">
-    <h2 class="text-center mb-4">Dodaj restoran</h2>
+    <h2 class="text-center mb-4 mt-5">Dodaj restoran</h2>
+    
 </div>
 <div class="container"  id="cont">
     <div class="form-group">
@@ -17,6 +18,10 @@
     <div class="form-group">
         <label>Kratak opis</label>
     <input type="text" [(ngModel)]="short_desc"class="form-control">
+    </div>
+    <div class="form-group">
+        <label>URL mape</label>
+    <input type="text" [(ngModel)]="map_url"class="form-control">
     </div>
     <div class="form-group">
         <label>Kontakt osoba</label>
@@ -56,10 +61,11 @@
     <input type="file" (change)="handleFileInput($event)"class="form-control">
     </div>
     
-    <button (click)="addRestaurant()" class="btn btn-primary">Dodaj restoran</button> 
-</div>
+    <div>
+        <button (click)="addRestaurant()" class="btn btn-primary">Dodaj restoran</button> 
 
-<!--
-Приликом уноса новог ресторана, уносе се назив
-ресторана, тип ресторана, адреса, кратак опис ресторана и контакт особа за ресторан.
--->
+    </div>
+    <div >
+        <a routerLink="/admin" class="mt-7">Nazad na admina</a>
+    </div>
+</div>
